@@ -1,2 +1,2 @@
 # ecg-cloud-now
-ecg-cloud-now
+Project server implementation repository
