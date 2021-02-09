@@ -1,0 +1,20 @@
+$color-background: #437F8C;
+
+.custom-button{
+    font-size: 1.3vw;
+    padding: 15px;
+    width: 200px;
+    margin-left: 5%;
+    margin-top: 5%;
+    background-color: $color-background;
+    color: #ffff;
+    border:2px solid #ccc;
+}
+
+.custom-button button:focus{
+    // Fazer isso quando apertar o botão (Tirar borda)
+}
+
+.text{
+    margin-top: -7%;
+}
