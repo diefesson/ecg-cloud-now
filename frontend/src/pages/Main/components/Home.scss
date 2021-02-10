@@ -1,5 +1,9 @@
 $color-background: #437F8C;
 
+body {
+    background-color: $color-background;
+}
+
 .custom-button{
     font-size: 1.3vw;
     padding: 15px;

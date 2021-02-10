@@ -3,7 +3,7 @@ import React from 'react'
 import imgHome from '../assets/ImgHome.png'
 import './Home.scss'
 
-export default props => {
+function Home () {
     return (
         <div>
             <div>
@@ -49,3 +49,5 @@ export default props => {
         </div>
     )
 }
+
+export default Home;

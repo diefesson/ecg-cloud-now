@@ -1,12 +1,10 @@
 import React from 'react'
-
-import Home from './components/Home'
-
+import Routes from './routes';
 
 export default props => {
     return(
-        <div className=''>
-            <Home/>
+        <div>
+            <Routes />
         </div>
     )
 }
