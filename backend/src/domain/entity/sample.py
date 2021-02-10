@@ -1,6 +1,3 @@
-from json import dumps
-
-
 class Sample:
 
     sample_id: int

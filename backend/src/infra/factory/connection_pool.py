@@ -1,4 +1,4 @@
-from app.enviroment import *
+from enviroment import *
 from pymysqlpool.pool import Pool
 
 connection_pool = Pool(
