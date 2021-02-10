@@ -1,13 +1,11 @@
-from infra.contract.dbservice import DBService
-from infra.entity.sample import Sample
+from infra.contract.db_repository import DbRepository
+from domain.entity.sample import Sample
 
 from pymysqlpool.pool import Pool
 from injector import inject
-from pymysql.connections import Connection
-from pymysql.cursors import Cursor
 
 
-class DbServiceImpl(DBService):
+class DbRepositoryImpl(DbRepository):
 
     _pool: Pool
 
