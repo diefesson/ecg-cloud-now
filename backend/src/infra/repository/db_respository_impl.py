@@ -17,4 +17,7 @@ class DbRepositoryImpl(DbRepository):
         conn: Connection = self._pool.get_conn()
         with conn.cursor() as cur:
             cur.execute('select * from ecg')
-            return cur.fetchall()
+            samples = cur.fetchall()
+            self._pool.release(conn)
+            return samples
+
