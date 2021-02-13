@@ -9,3 +9,7 @@ class SampleRepository(ABC):
     @abstractmethod
     def get_samples(self) -> [Sample]:
         pass
+
+    @abstractmethod
+    def get_sample(self, sample_id: int) -> Sample:
+        pass

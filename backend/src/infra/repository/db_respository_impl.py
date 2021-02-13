@@ -21,3 +21,10 @@ class DbRepositoryImpl(DbRepository):
             self._pool.release(conn)
             return samples
 
+    def get_sample(self, sample_id: int) -> {}:
+        conn: Connection = self._pool.get_conn()
+        with conn.cursor() as cur:
+            cur.execute(f'select * from ecg where sample_id={sample_id}')
+            sample = cur.fetchone()
+            self._pool.release(conn)
+            return sample
