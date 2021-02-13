@@ -8,3 +8,5 @@ MYSQL_PORT = int(getenv("MYSQL_PORT", "3306"))
 MYSQL_SCHEMA = getenv("MYSQL_SCHEMA", "ecn")
 MYSQL_USER = getenv("MYSQL_USER")
 MYSQL_PASSWORD = getenv("MYSQL_PASSWORD")
+
+HTTP_PORT = int(getenv("HTTP_PORT", "8080"))

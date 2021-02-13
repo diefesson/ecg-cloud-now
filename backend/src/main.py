@@ -1,4 +1,6 @@
 from flask import Flask
+
+import enviroment
 from web.sample_endpoint import sample_endpoint
 
 app: Flask = Flask(__name__)
@@ -11,4 +13,4 @@ def hello():
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', 80)
+    app.run('0.0.0.0', enviroment.HTTP_PORT)
