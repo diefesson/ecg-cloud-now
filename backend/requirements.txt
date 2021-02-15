@@ -3,3 +3,4 @@ py-dotenv==0.1
 injector==0.18.4
 pymysql==1.0.2
 pymysql-pooling==1.0.6
+flask-cors==3.0.10
