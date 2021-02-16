@@ -1,0 +1,42 @@
+header {
+    background-color: #437F8C;
+  }
+  
+  header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    width: 100%;
+    margin: auto;
+  }
+  
+  header img {
+    width: 200px;
+    margin-left: 30px;
+    margin-top: 10px;
+    padding: 15px;
+  }
+  
+  header nav ul {
+      margin-right: 150px;
+    display: flex;
+  }
+  
+  header nav ul li {
+    list-style: none;
+  }
+  
+  header nav ul li a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 0px 70px 0px 10px;
+    transition: all 250ms linear 0s;
+  }
+  
+  header nav ul li a:hover {
+      text-decoration: underline;
+  }
+  
