@@ -20,3 +20,10 @@ def sample_get(sample_id):
     sample_id = int(sample_id)
     sample: Sample = sample_repository.get_sample(sample_id)
     return dumps(sample.__dict__)
+
+
+@sample_endpoint.route('/sample/of_patient/<patient_id>')
+def sample_of_patient(patient_id):
+    patient_id = int(patient_id)
+    samples = sample_repository.get_samples_of_patient(patient_id)
+    return dumps([s.__dict__ for s in samples])
