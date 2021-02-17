@@ -1,4 +1,10 @@
 import React from 'react'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 
 import Menu from '../templates/Menu'
 
@@ -16,6 +22,7 @@ import './Home.scss'
 import '../../../Style.scss'
 
 export default props => {
+
     return (
         <div>
             <div>
@@ -36,8 +43,12 @@ export default props => {
                        seja você um médico ou um paciente.</p>
                             </div>
                             <div className='line'>
-                                <input className='custom-button' type="button" value="Sou Médico" />
-                                <input className='custom-button' type="button" value="Sou Paciente" />
+                                <Link className='custom-button' type="button" to='login-medico' >
+                                    <span className='route-value'>Sou Médico</span>
+                                </Link>
+                                <Link className='custom-button' type="button" to='login-paciente' >
+                                    <span className='route-value'>Sou Paciente</span>
+                                </Link>
                             </div>
                         </div>
                     </div>

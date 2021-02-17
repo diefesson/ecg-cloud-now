@@ -29,11 +29,11 @@ export default props => {
                     src={Logo}
                     alt="Rocketseat"
                 />
-                <div class="menu-section">
-                    <div class="menu-toggle">
-                        <div class="one"></div>
-                        <div class="two"></div>
-                        <div class="three"></div>
+                <div className="menu-section">
+                    <div className="menu-toggle">
+                        <div className="one"></div>
+                        <div className="two"></div>
+                        <div className="three"></div>
                     </div>
                     <nav>
                         <ul>

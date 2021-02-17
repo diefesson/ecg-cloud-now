@@ -18,10 +18,12 @@ $color-background: #437F8C;
     padding: 15px;
     width: 200px;
     margin-left: 5%;
-    margin-top: 5%;
+    margin-top: 3%;
     background-color: $color-background;
     color: #ffff;
     border:1px solid #ccc;
+    display: flex;
+    text-decoration: none;
 }
 
 .custom-button:hover{
@@ -137,4 +139,11 @@ $color-background: #437F8C;
 
   .text-photo{
       width: 180px;
+  }
+
+  .route-value{
+      margin: auto;
+  }
+
+  .route-value span{
   }
