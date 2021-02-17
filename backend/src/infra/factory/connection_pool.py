@@ -6,5 +6,6 @@ connection_pool = Pool(
     port=MYSQL_PORT,
     db=MYSQL_SCHEMA,
     user=MYSQL_USER,
-    password=MYSQL_PASSWORD
+    password=MYSQL_PASSWORD,
+    autocommit=True
 )
