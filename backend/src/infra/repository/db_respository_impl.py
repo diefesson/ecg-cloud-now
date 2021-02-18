@@ -14,10 +14,10 @@ class DbRepositoryImpl(DbRepository):
     def __init__(self, pool: Pool):
         self._pool = pool
 
-    def get_samples(self) -> []:
+    def get_all_samples(self) -> []:
         conn: Connection = self._pool.get_conn()
         with conn.cursor() as cur:
-            cur.execute('select * from ecg')
+            cur.execute(SELECT_ALL_SAMPLES)
             samples = cur.fetchall()
             self._pool.release(conn)
             return samples
@@ -25,7 +25,7 @@ class DbRepositoryImpl(DbRepository):
     def get_sample(self, sample_id: int) -> {}:
         conn: Connection = self._pool.get_conn()
         with conn.cursor() as cur:
-            cur.execute(f'select * from ecg where sample_id={sample_id}')
+            cur.execute(SELECT_SAMPLE.format(sample_id=sample_id))
             sample = cur.fetchone()
             self._pool.release(conn)
             return sample
@@ -38,7 +38,7 @@ class DbRepositoryImpl(DbRepository):
             self._pool.release(conn)
             return rows
 
-    def get_patients(self) -> {}:
+    def get_all_patients(self) -> {}:
         conn: Connection = self._pool.get_conn()
         with conn.cursor() as cur:
             cur.execute(SELECT_ALL_PATIENTS)

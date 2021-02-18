@@ -12,8 +12,8 @@ class SampleRepositoryImpl(SampleRepository):
     def __init__(self, db: DbRepository):
         self._db = db
 
-    def get_samples(self) -> [Sample]:
-        rows = self._db.get_samples()
+    def get_all_samples(self) -> [Sample]:
+        rows = self._db.get_all_samples()
         return [Sample.from_row(r) for r in rows]
 
     def get_sample(self, sample_id: int) -> Sample:

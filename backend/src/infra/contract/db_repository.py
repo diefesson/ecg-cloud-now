@@ -5,7 +5,7 @@ from abc import abstractmethod
 class DbRepository(ABC):
 
     @abstractmethod
-    def get_samples(self) -> []:
+    def get_all_samples(self) -> []:
         pass
 
     @abstractmethod
@@ -17,7 +17,7 @@ class DbRepository(ABC):
         pass
 
     @abstractmethod
-    def get_patients(self) -> []:
+    def get_all_patients(self) -> []:
         pass
 
     @abstractmethod

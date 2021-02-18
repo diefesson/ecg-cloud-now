@@ -12,7 +12,7 @@ sample_repository = injector.get(SampleRepository)
 
 @sample_endpoint.route('/sample/all')
 def sample_all():
-    return dumps([s.__dict__ for s in sample_repository.get_samples()])
+    return dumps([s.__dict__ for s in sample_repository.get_all_samples()])
 
 
 @sample_endpoint.route('/sample/<sample_id>')

@@ -6,7 +6,7 @@ from domain.entity.patient import Patient
 class PatientRepository(ABC):
 
     @abstractmethod
-    def get_patients(self) -> [Patient]:
+    def get_all_patients(self) -> [Patient]:
         pass
 
     @abstractmethod

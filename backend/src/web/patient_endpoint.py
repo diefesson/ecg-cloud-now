@@ -11,7 +11,7 @@ _patient_repository = injector.get(PatientRepository)
 
 @patient_endpoint.route('/patient/all')
 def patient_all():
-    patients: [Patient] = _patient_repository.get_patients()
+    patients: [Patient] = _patient_repository.get_all_patients()
     return dumps([p.__dict__ for p in patients])
 
 
