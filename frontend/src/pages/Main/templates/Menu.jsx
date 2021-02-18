@@ -27,7 +27,7 @@ export default props => {
             <div className='container'>
                 <img
                     src={Logo}
-                    alt="Rocketseat"
+                    alt="ECG-NOW"
                 />
                 <div className="menu-section">
                     <div className="menu-toggle">

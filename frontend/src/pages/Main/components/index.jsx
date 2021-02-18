@@ -4,7 +4,7 @@ import {
     Switch,
     Route,
     Link
-  } from "react-router-dom";
+} from "react-router-dom";
 
 import Menu from '../templates/Menu'
 
@@ -26,9 +26,11 @@ export default props => {
     return (
         <div>
             <div>
-                <Menu />
+                <header>
+                    <Menu />
+                </header>
                 <div className='line first-page'>
-                    <div className='col-50 '>
+                    <div className='col-50'>
                         <div className='esp-left'>
                             <div>
                                 <h1>Uma Plataforma Focada em
@@ -108,13 +110,12 @@ export default props => {
                                 <div className='line redes-sociais'>
                                     <ul>
                                         <li>
-                                            <a href="" className=''> <img src={instagram} alt="instagram"/> </a>
-                                         </li>
-                                        <li>
-                                            <a href="" className=''><img src={facebook} alt="facebook"/></a>
+                                            <a href="" className=''> <img src={instagram} alt="instagram" /> </a>
                                         </li>
                                         <li>
-                                            {/* <a href="" className=''>Github</a> */}
+                                            <a href="" className=''><img src={facebook} alt="facebook" /></a>
+                                        </li>
+                                        <li>
                                         </li>
                                     </ul>
                                 </div>
@@ -128,19 +129,18 @@ export default props => {
                             <div className='text-photo'>
                                 <p>
                                     <span className='first-text-teams'><strong>Adalberto Felipe</strong></span>
-                                    <span className='second-text-teams'>Frontend developer</span>
+                                    <span className='second-text-teams'>Frontend Devoloped</span>
                                 </p>
                                 <div className='line redes-sociais'>
                                     <ul>
                                         <li>
-                                            <a href="https://www.instagram.com/f.pinheirooo/" className=''> 
-                                            <img src={instagram} alt="instagram"/> </a>
-                                         </li>
-                                        <li>
-                                            <a href="" className=''><img src={facebook} alt="facebook"/></a>
+                                            <a href="https://www.instagram.com/f.pinheirooo/" className=''>
+                                                <img src={instagram} alt="instagram" /> </a>
                                         </li>
                                         <li>
-                                            {/* <a href="" className=''>Github</a> */}
+                                            <a href="" className=''><img src={facebook} alt="facebook" /></a>
+                                        </li>
+                                        <li>
                                         </li>
                                     </ul>
                                 </div>
@@ -155,26 +155,25 @@ export default props => {
                             <div className='text-photo'>
                                 <p>
                                     <span className='first-text-teams'><strong>Diefesson Sousa</strong></span>
-                                    <span className='second-text-teams'>     Devoloped</span>
+                                    <span className='second-text-teams'>Backend Devoloped</span>
                                 </p>
                                 <div className='line redes-sociais'>
                                     <ul>
                                         <li>
-                                            <a href="" className=''> <img src={instagram} alt="instagram"/> </a>
-                                         </li>
-                                        <li>
-                                            <a href="" className=''><img src={facebook} alt="facebook"/></a>
+                                            <a href="" className=''> <img src={instagram} alt="instagram" /> </a>
                                         </li>
                                         <li>
-                                            {/* <a href="" className=''>Github</a> */}
+                                            <a href="" className=''><img src={facebook} alt="facebook" /></a>
+                                        </li>
+                                        <li>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div className='luis'>
-                        <div className='photo'>
+                            <div className='photo'>
                                 <img src={imgLuis} alt="Photo" />
                             </div>
                             <div className='text-photo'>
@@ -185,20 +184,19 @@ export default props => {
                                 <div className='line redes-sociais'>
                                     <ul>
                                         <li>
-                                            <a href="" className=''> <img src={instagram} alt="instagram"/> </a>
-                                         </li>
-                                        <li>
-                                            <a href="" className=''><img src={facebook} alt="facebook"/></a>
+                                            <a href="" className=''> <img src={instagram} alt="instagram" /> </a>
                                         </li>
                                         <li>
-                                            {/* <a href="" className=''>Github</a> */}
+                                            <a href="" className=''><img src={facebook} alt="facebook" /></a>
+                                        </li>
+                                        <li>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div className='victor'> 
-                        <div className='photo'>
+                        <div className='victor'>
+                            <div className='photo'>
                                 <img src={imgVictor} alt="Photo" />
                             </div>
                             <div className='text-photo'>
@@ -209,13 +207,12 @@ export default props => {
                                 <div className='line redes-sociais'>
                                     <ul>
                                         <li>
-                                            <a href="" className=''><img src={instagram} alt="instagram"/></a>
+                                            <a href="" className=''><img src={instagram} alt="instagram" /></a>
                                         </li>
                                         <li>
-                                            <a href="" className=''><img src={facebook} alt="facebook"/></a>
+                                            <a href="" className=''><img src={facebook} alt="facebook" /></a>
                                         </li>
                                         <li>
-                                            {/* <a href="" className=''>Github</a> */}
                                         </li>
                                     </ul>
                                 </div>
