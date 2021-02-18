@@ -25,7 +25,7 @@ class DbRepositoryImpl(DbRepository):
     def get_sample(self, sample_id: int) -> {}:
         conn: Connection = self._pool.get_conn()
         with conn.cursor() as cur:
-            cur.execute(SELECT_SAMPLE.format(sample_id=sample_id))
+            cur.execute(SELECT_SAMPLE, {'sample_id': sample_id})
             sample = cur.fetchone()
             self._pool.release(conn)
             return sample
@@ -33,7 +33,7 @@ class DbRepositoryImpl(DbRepository):
     def get_samples_of_patient(self, patient_id: int) -> []:
         conn: Connection = self._pool.get_conn()
         with conn.cursor() as cur:
-            cur.execute(SELECT_SAMPLES_OF_PATIENT.format(patient_id=patient_id))
+            cur.execute(SELECT_SAMPLES_OF_PATIENT, {'patient_id': patient_id})
             rows = cur.fetchall()
             self._pool.release(conn)
             return rows
@@ -49,7 +49,7 @@ class DbRepositoryImpl(DbRepository):
     def get_patient(self, patient_id: int) -> {}:
         conn: Connection = self._pool.get_conn()
         with conn.cursor() as cur:
-            cur.execute(SELECT_PATIENT.format(patient_id=patient_id))
+            cur.execute(SELECT_PATIENT, {'patient_id': patient_id})
             row = cur.fetchone()
             self._pool.release(conn)
             return row
