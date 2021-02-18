@@ -155,7 +155,7 @@ export default props => {
                             <div className='text-photo'>
                                 <p>
                                     <span className='first-text-teams'><strong>Diefesson Sousa</strong></span>
-                                    <span className='second-text-teams'>Backend Devoloped</span>
+                                    <span className='second-text-teams'>     Devoloped</span>
                                 </p>
                                 <div className='line redes-sociais'>
                                     <ul>
@@ -203,8 +203,8 @@ export default props => {
                             </div>
                             <div className='text-photo'>
                                 <p>
-                                    <span className='first-text-teams'><strong>Luis Felipe</strong></span>
-                                    <span className='second-text-teams'>Frontend Devoloped</span>
+                                    <span className='first-text-teams'><strong>Victor Martins</strong></span>
+                                    <span className='second-text-teams'>Backend Devoloped</span>
                                 </p>
                                 <div className='line redes-sociais'>
                                     <ul>
