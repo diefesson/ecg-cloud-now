@@ -18,7 +18,7 @@ def user(user_id):
         return "user not found", 404
 
 
-@user_endpoint.route("/user/create/", methods=["post"])
+@user_endpoint.route("/user/create", methods=["post"])
 def user_create():
     values = _USER_CREATE_SCHEMA.loads(request.data)
     if not values:
@@ -32,8 +32,24 @@ def user_create():
     return "user created"
 
 
+@user_endpoint.route("/user/has_user", methods=["post"])
+def user_has_user():
+    values = _USER_HAS_USER_SCHEMA.loads(request.data)
+    if not values:
+        return "bad request", 400
+    username = values["username"]
+    email = values["email"]
+    exists = _user_db.has_user(username, email)
+    return {"exists": exists}
+
+
 _USER_CREATE_SCHEMA = Schema.from_dict({
     "username": fields.String(required=True),
     "email": fields.String(required=True),
     "password": fields.String(required=True)
+})()
+
+_USER_HAS_USER_SCHEMA = Schema.from_dict({
+    "username": fields.String(required=True),
+    "email": fields.String(required=True)
 })()
