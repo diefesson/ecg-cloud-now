@@ -7,7 +7,6 @@ from injector import inject
 
 
 class DbRepositoryImpl(DbRepository):
-
     _pool: Pool
 
     @inject
