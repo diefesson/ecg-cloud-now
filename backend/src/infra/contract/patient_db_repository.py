@@ -3,12 +3,12 @@ from abc import ABC, abstractmethod
 from domain.entity.patient import Patient
 
 
-class PatientRepository(ABC):
+class PatientDbRepository(ABC):
 
     @abstractmethod
-    def get_all_patients(self) -> [Patient]:
+    def get_all_patients(self) -> list[Patient]:
         pass
 
     @abstractmethod
-    def get_patient(self, patient_id: int) -> Patient:
+    def get_patient(self, patient_id: int) -> Patient or None:
         pass

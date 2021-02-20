@@ -46,7 +46,7 @@ class UserDbRepositoryImpl(UserDbRepository):
             self._pool.release(conn)
             return exist
 
-    def get_credential(self, username: str) -> Credential:
+    def get_credential(self, username: str) -> Credential or None:
         conn = self._pool.get_conn()
         with conn.cursor() as cur:
             cur.execute(_GET_CREDENTIAL, (username,))

@@ -7,7 +7,7 @@ from domain.entity.credential import Credential
 class UserDbRepository(ABC):
 
     @abstractmethod
-    def get_user(self, user_id: int) -> User:
+    def get_user(self, user_id: int) -> User or None:
         pass
 
     @abstractmethod

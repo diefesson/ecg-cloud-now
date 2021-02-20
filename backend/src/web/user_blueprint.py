@@ -4,21 +4,21 @@ from marshmallow import Schema, fields
 from app.application import injector
 from infra.contract.user_db_repository import UserDbRepository
 
-user_endpoint = Blueprint("user_endpoint", __name__)
+user_blueprint = Blueprint("user_blueprint", __name__)
 _user_db: UserDbRepository = injector.get(UserDbRepository)
 
 
-@user_endpoint.route("/user/<user_id>")
-def user(user_id):
+@user_blueprint.route("/user/get/<user_id>")
+def user_get(user_id):
     user_id = int(user_id)
     user = _user_db.get_user(user_id)
     if user:
-        return user.to_json()
+        return user.__dict__
     else:
         return "user not found", 404
 
 
-@user_endpoint.route("/user/create", methods=["post"])
+@user_blueprint.route("/user/create", methods=["post"])
 def user_create():
     values = _USER_CREATE_SCHEMA.loads(request.data)
     if not values:
@@ -32,7 +32,7 @@ def user_create():
     return "user created"
 
 
-@user_endpoint.route("/user/has_user", methods=["post"])
+@user_blueprint.route("/user/has_user", methods=["post"])
 def user_has_user():
     values = _USER_HAS_USER_SCHEMA.loads(request.data)
     if not values:

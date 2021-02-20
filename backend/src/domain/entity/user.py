@@ -1,6 +1,3 @@
-from json import dumps
-
-
 class User:
     user_id: int
     username: str
@@ -10,9 +7,6 @@ class User:
         self.user_id = user_id
         self.username = username
         self.email = email
-
-    def to_json(self) -> str:
-        return dumps(self.__dict__)
 
     @classmethod
     def from_row(cls, row):
