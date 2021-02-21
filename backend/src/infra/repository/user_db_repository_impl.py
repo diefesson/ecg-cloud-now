@@ -6,6 +6,7 @@ from domain.entity.user import User
 from infra.contract.user_db_repository import UserDbRepository
 
 _GET_USER = "select user_id, username, email from user where user_id = %s"
+_USERNAME_TO_USER_ID = "select user_id from user where username = %s"
 _ADD_USER = "insert into user(username, email, password_hash) values (%s, %s, %s)"
 _HAS_USER = "select user_id from user where username = %s or email = %s"
 _GET_CREDENTIAL = "select password_hash from user where username = %s"
@@ -26,6 +27,15 @@ class UserDbRepositoryImpl(UserDbRepository):
             self._pool.release(conn)
             user = User.from_row(row) if row else None
             return user
+
+    def username_to_user_id(self, username: str) -> int or None:
+        conn = self._pool.get_conn()
+        with conn.cursor() as cur:
+            cur.execute(_USERNAME_TO_USER_ID, (username,))
+            row = cur.fetchone()
+            self._pool.release(conn)
+            user_id = row["user_id"] if row else None
+            return user_id
 
     def add_user(self, username: str, email: str, password: str):
         values = (

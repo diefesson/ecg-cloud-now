@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, ValidationError
 
 from app.application import injector
 from infra.contract.user_db_repository import UserDbRepository
@@ -20,22 +20,24 @@ def user_get(user_id):
 
 @user_blueprint.route("/user/create", methods=["post"])
 def user_create():
-    values = _USER_CREATE_SCHEMA.loads(request.data)
-    if not values:
+    try:
+        values = _USER_CREATE_SCHEMA.loads(request.data)
+    except ValidationError:
         return "bad request", 400
     username = values["username"]
     email = values["email"]
     password = values["password"]
     if _user_db.has_user(username, email):
-        return "user already exists", 400
+        return {"success": False, "cause": "user_already_exists"}
     _user_db.add_user(username, email, password)
-    return "user created"
+    return {"success": True}
 
 
 @user_blueprint.route("/user/has_user", methods=["post"])
 def user_has_user():
-    values = _USER_HAS_USER_SCHEMA.loads(request.data)
-    if not values:
+    try:
+        values = _USER_HAS_USER_SCHEMA.loads(request.data)
+    except ValidationError:
         return "bad request", 400
     username = values["username"]
     email = values["email"]

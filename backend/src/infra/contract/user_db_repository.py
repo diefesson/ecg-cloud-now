@@ -11,6 +11,10 @@ class UserDbRepository(ABC):
         pass
 
     @abstractmethod
+    def username_to_user_id(self, username: str) -> User or None:
+        pass
+
+    @abstractmethod
     def add_user(self, username: str, email: str, password: str):
         pass
 
