@@ -1,4 +1,18 @@
 # User endpoints
+## User structure
+| field    | type   | required | description                            |
+| -------- | ------ | -------- | -------------------------------------- |
+| username | string | true     |                                        |
+| email    | string | true     |                                        |
+| name     | string | true     |                                        |
+| phone    | string | true     |                                        |
+| type     | int    | true     | 0 for patient, 1 for medic             |
+| id_doc   | string | true     | RG for patient, CRM for medic          |
+| state    | string | true     | 2 character state abbreviation, eg: CE |
+| city     | string | true     |                                        |
+| district | string | true     |                                        |
+| address  | string | true     |                                        |
+
 ## GET user/get/<user_id>
 Retrieves the specified user data.
 
@@ -6,10 +20,9 @@ Retrieves the specified user data.
 Creates a new user.
 
 **Request structure**
+All the user fields plus the field bellow
 | field    | type   | required | description |
 | -------- | ------ | -------- | ----------- |
-| username | string | true     |             |
-| email    | string | true     |             |
 | password | string | true     |             |
 
 **Response structure**
