@@ -1,6 +1,6 @@
 from base64 import b64encode
 from random import randint
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 _TOKEN_SIZE = 32
 _EXPIRE_TIME = timedelta(days=1)
@@ -22,7 +22,8 @@ class Session:
         self.expire = expire if expire is not None else datetime.now() + _EXPIRE_TIME
 
     def as_dict(self):
-        return {**self.__dict__, "expire": self.expire.isoformat()}
+        iso_expire = self.expire.astimezone(timezone.utc).isoformat()
+        return {**self.__dict__, "expire": iso_expire}
 
     def expired(self) -> bool:
         return self.expire < datetime.now()
