@@ -19,14 +19,18 @@ class Session:
     def __init__(self, user_id: int, token: str = None, expire: datetime = None):
         self.user_id = user_id
         self.token = token if token is not None else _gen_token()
-        self.expire = expire if expire is not None else datetime.now() + _EXPIRE_TIME
+        self.expire = expire if expire is not None else datetime.now(timezone.utc) + _EXPIRE_TIME
+        # Converts unaware datetime to UTC datetime if necessary
+        if self.expire.tzinfo is None:
+            self.expire = self.expire.astimezone(timezone.utc)
 
     def as_dict(self):
-        iso_expire = self.expire.astimezone(timezone.utc).isoformat()
+        iso_expire = self.expire.isoformat()
         return {**self.__dict__, "expire": iso_expire}
 
     def expired(self) -> bool:
-        return self.expire < datetime.now()
+        print(self.expire)
+        return self.expire < datetime.now(timezone.utc)
 
     @classmethod
     def from_row(cls, row):
