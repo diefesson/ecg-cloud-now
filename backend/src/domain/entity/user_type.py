@@ -1,0 +1,2 @@
+PATIENT = 0
+MEDIC = 1

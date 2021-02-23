@@ -1,8 +1,10 @@
 from flask import Blueprint, request
-from marshmallow import Schema, fields, ValidationError
+from marshmallow import ValidationError
 
 from app.application import injector
+from domain.entity.user import User
 from infra.contract.user_db_repository import UserDbRepository
+from web.validatation.user_validation import USER_CREATE_SCHEMA, USER_HAS_USER_SCHEMA
 
 user_blueprint = Blueprint("user_blueprint", __name__)
 _user_db: UserDbRepository = injector.get(UserDbRepository)
@@ -21,7 +23,7 @@ def user_get(user_id):
 @user_blueprint.route("/user/create", methods=["post"])
 def user_create():
     try:
-        values = _USER_CREATE_SCHEMA.loads(request.data)
+        values = USER_CREATE_SCHEMA.loads(request.data)
     except ValidationError:
         return "bad request", 400
     username = values["username"]
@@ -29,14 +31,26 @@ def user_create():
     password = values["password"]
     if _user_db.has_user(username, email):
         return {"success": False, "cause": "user_already_exists"}
-    _user_db.add_user(username, email, password)
+    user = User(
+        values["username"],
+        values["email"],
+        values["name"],
+        values["phone"],
+        values["type"],
+        values["id_doc"],
+        values["state"],
+        values["city"],
+        values["district"],
+        values["address"]
+    )
+    _user_db.add_user(user, password)
     return {"success": True}
 
 
 @user_blueprint.route("/user/has_user", methods=["post"])
 def user_has_user():
     try:
-        values = _USER_HAS_USER_SCHEMA.loads(request.data)
+        values = USER_HAS_USER_SCHEMA.loads(request.data)
     except ValidationError:
         return "bad request", 400
     username = values["username"]
@@ -44,14 +58,3 @@ def user_has_user():
     exists = _user_db.has_user(username, email)
     return {"exists": exists}
 
-
-_USER_CREATE_SCHEMA = Schema.from_dict({
-    "username": fields.String(required=True),
-    "email": fields.String(required=True),
-    "password": fields.String(required=True)
-})()
-
-_USER_HAS_USER_SCHEMA = Schema.from_dict({
-    "username": fields.String(required=True),
-    "email": fields.String(required=True)
-})()

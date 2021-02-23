@@ -1,26 +1,22 @@
 from flask import Blueprint, request, make_response
-from marshmallow import Schema, fields, ValidationError
+from marshmallow import ValidationError
 
 from app.application import injector
 from domain.entity.credential import Credential
 from domain.entity.session import Session
 from infra.contract.session_db_repository import SessionDbRepository
 from infra.contract.user_db_repository import UserDbRepository
+from web.validatation.session_validation import SESSION_CREATE_SCHEMA
 
 session_blueprint = Blueprint("session_blueprint", __name__)
 _user_db: UserDbRepository = injector.get(UserDbRepository)
 _session_db: SessionDbRepository = injector.get(SessionDbRepository)
 
-_SESSION_CREATE_SCHEMA = Schema.from_dict({
-    "username": fields.String(required=True),
-    "password": fields.String(required=True)
-})()
-
 
 @session_blueprint.route("/session/create", methods=["post"])
 def session_create():
     try:
-        values = _SESSION_CREATE_SCHEMA.loads(request.data)
+        values = SESSION_CREATE_SCHEMA.loads(request.data)
     except ValidationError:
         return "bad request", 400
     username = values["username"]

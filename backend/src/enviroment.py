@@ -9,5 +9,6 @@ MYSQL_SCHEMA = getenv("MYSQL_SCHEMA", "ecn")
 MYSQL_USER = getenv("MYSQL_USER")
 MYSQL_PASSWORD = getenv("MYSQL_PASSWORD")
 
+HTTP_HOST = getenv("HTTP_HOST", "0.0.0.0")
 HTTP_PORT = int(getenv("HTTP_PORT", "8080"))
 DEPLOY_MODE = getenv("DEPLOY_MODE", "dev")

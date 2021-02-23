@@ -15,7 +15,7 @@ class UserDbRepository(ABC):
         pass
 
     @abstractmethod
-    def add_user(self, username: str, email: str, password: str):
+    def add_user(self, user: User, password: str):
         pass
 
     @abstractmethod

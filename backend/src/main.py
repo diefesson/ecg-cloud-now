@@ -21,4 +21,4 @@ def hello():
     return f"deploy mode: {enviroment.DEPLOY_MODE}"
 
 
-app.run('0.0.0.0', enviroment.HTTP_PORT)
+app.run(enviroment.HTTP_HOST, enviroment.HTTP_PORT)

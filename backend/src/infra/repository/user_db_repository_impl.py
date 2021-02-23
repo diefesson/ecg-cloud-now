@@ -5,9 +5,10 @@ from domain.entity.credential import Credential
 from domain.entity.user import User
 from infra.contract.user_db_repository import UserDbRepository
 
-_GET_USER = "select user_id, username, email from user where user_id = %s"
+_USER_FIELDS = "username, email, name, type, id_doc, phone, state, city, district, address"
+_GET_USER = f"select user_id, {_USER_FIELDS} from user where user_id = %s"
 _USERNAME_TO_USER_ID = "select user_id from user where username = %s"
-_ADD_USER = "insert into user(username, email, password_hash) values (%s, %s, %s)"
+_ADD_USER = f"insert into user({_USER_FIELDS}, password_hash) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 _HAS_USER = "select user_id from user where username = %s or email = %s"
 _GET_CREDENTIAL = "select password_hash from user where username = %s"
 
@@ -37,11 +38,19 @@ class UserDbRepositoryImpl(UserDbRepository):
             user_id = row["user_id"] if row else None
             return user_id
 
-    def add_user(self, username: str, email: str, password: str):
+    def add_user(self, user: User, password: str):
         values = (
-            username,
-            email,
-            Credential.calculate_hash(username, password)
+            user.username,
+            user.email,
+            user.name,
+            user.type,
+            user.id_doc,
+            user.phone,
+            user.state,
+            user.city,
+            user.district,
+            user.address,
+            Credential.calculate_hash(user.username, password)
         )
         conn = self._pool.get_conn()
         with conn.cursor() as cur:
