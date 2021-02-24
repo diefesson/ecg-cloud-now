@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from marshmallow import ValidationError
 
 from app.application import injector
@@ -18,6 +18,20 @@ def user_get(user_id):
         return user.__dict__
     else:
         return "user not found", 404
+
+@user_blueprint.route("/user/all")
+def user_all():
+    users = _user_db.get_users()
+    return jsonify([u.__dict__ for u in users])
+
+@user_blueprint.route("/user/all/<type>")
+def user_all_of_type(type):
+    try:
+        type = int(type)
+    except ValueError:
+        return "bad request", 400
+    users = _user_db.get_users(type)
+    return jsonify([u.__dict__ for u in users])
 
 
 @user_blueprint.route("/user/create", methods=["post"])

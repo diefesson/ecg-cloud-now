@@ -7,6 +7,7 @@ from infra.contract.user_db_repository import UserDbRepository
 
 _USER_FIELDS = "username, email, name, type, id_doc, phone, state, city, district, address"
 _GET_USER = f"select user_id, {_USER_FIELDS} from user where user_id = %s"
+_GET_USERS = f"select user_id, {_USER_FIELDS} from user"
 _USERNAME_TO_USER_ID = "select user_id from user where username = %s"
 _ADD_USER = f"insert into user({_USER_FIELDS}, password_hash) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 _HAS_USER = "select user_id from user where username = %s or email = %s"
@@ -28,6 +29,19 @@ class UserDbRepositoryImpl(UserDbRepository):
             self._pool.release(conn)
             user = User.from_row(row) if row else None
             return user
+
+    def get_users(self, type: int or None = None) -> list[User]:
+        sql = _GET_USERS
+        values = ()
+        if type is not None:
+            sql += " where type = %s"
+            values += (type,)
+        conn = self._pool.get_conn()
+        with conn.cursor() as cur:
+            cur.execute(sql, values)
+            rows = cur.fetchall()
+            self._pool.release(conn)
+            return [User.from_row(r) for r in rows]
 
     def username_to_user_id(self, username: str) -> int or None:
         conn = self._pool.get_conn()
