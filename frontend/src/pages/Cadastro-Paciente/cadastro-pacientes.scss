@@ -1,0 +1,96 @@
+$primary-color: #437F8C;
+$second-color: #ffff;
+
+.register-center{
+    width: 40vw;
+    height: 95vh;
+    max-width: 40vw;
+    max-height: 95vh;
+    border-radius: 25px;
+    padding: 0;
+    background-color: $second-color;
+    color: $primary-color;
+    margin: auto;
+}
+
+.register-center h2{
+    margin-left: 18px;
+}
+
+.register-margin{
+    margin-top: -30px;
+    margin-left: 40px;
+    display: flex;
+}
+
+.name-form{
+    margin: 0;
+}
+
+.name-form label{
+    font-size: 1rem;
+    margin-bottom: 200px;
+}
+
+.input-form{
+    margin-top: -15px;
+    width: 34vw; 
+    // Deixar aqui resposivo
+}
+
+.input-form input{
+    width: 100%;
+    padding: 2px;
+    border-style: solid;
+    border-color: $primary-color;
+}
+
+.input-form button{
+    width: 100%;
+    padding: 1px;
+}
+
+.first-button{
+    margin-top: 10px;
+}
+
+.input-form-two-elements{
+    margin-top: -15px;
+}
+
+.input-form-two-elements input a{
+    width: 100%;
+    padding: 2px;
+    border-style: solid;
+    border-color: $primary-color;
+
+}
+
+.input-form-two-elements select{
+    width: 100%;
+    padding: 2px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: $primary-color;
+
+}
+
+.input-two{
+    margin-left: 40px;
+}
+
+.input-two-adress{
+    margin-left: 40px;
+}
+
+.register-margin div{
+    margin-bottom: -2px;
+}
+
+.custom-button-register{
+    border-style: solid;
+    border-color: $primary-color;
+    border-radius: 5px;
+    background-color: $primary-color;
+    color: $second-color;
+}

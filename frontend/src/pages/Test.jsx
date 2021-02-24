@@ -1,9 +1,8 @@
 import { Component } from 'react'
 
-import api from '../service/api'
 import EcgChart from '../EcgChart'
 
-
+import Paciente from '../service/pacient'   
 
 class Test extends Component {
     state = {
@@ -11,9 +10,7 @@ class Test extends Component {
     }
 
     componentDidMount = async function () {
-
-
-        const response = await api.get('' + process.env.REACT_APP_ENDPOINT_TODOS_PACIENTES);
+        const response = await Paciente.list().then();
 
         this.setState({ pacientes: response.data });
     }

@@ -3,9 +3,7 @@ import $ from 'jquery';
 
 
 import './Menu.scss'
-import '../../../Style.scss'
-
-import Logo from '../assets/Logo.png'
+import Logo from '../../assets/Logo.png'
 
 export default props => {
     function down(params) {

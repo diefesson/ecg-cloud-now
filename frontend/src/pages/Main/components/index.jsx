@@ -1,12 +1,10 @@
 import React from 'react'
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
+    BrowserRouter as 
     Link
 } from "react-router-dom";
 
-import Menu from '../templates/Menu'
+import Menu from '../templates/Menu/Menu'
 
 import imgHome from '../assets/ImgHome.png'
 import imgAbout from '../assets/AboutUs.png'

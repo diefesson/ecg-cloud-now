@@ -1,0 +1,27 @@
+.grid-preview{
+    margin: 0;
+    padding: 0;
+    width: 80vw;
+    max-height: 78vh;
+    margin-top: 22vh;
+    overflow: auto;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.card-position{
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+::-webkit-scrollbar {
+    width: 3px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #ffff;
+}
