@@ -23,8 +23,9 @@ def sample_get(sample_id):
         return "sample not found", 404
 
 
-@sample_blueprint.route('/sample/of_patient/<patient_id>')
-def sample_of_patient(patient_id):
-    patient_id = int(patient_id)
-    samples = _sample_db.get_samples_of_patient(patient_id)
+@sample_blueprint.route('/sample/of_patient/<user_id>')
+@sample_blueprint.route('/sample/of_user/<user_id>')
+def sample_of_user(user_id):
+    user_id = int(user_id)
+    samples = _sample_db.get_samples_of_patient(user_id)
     return jsonify([s.__dict__ for s in samples])

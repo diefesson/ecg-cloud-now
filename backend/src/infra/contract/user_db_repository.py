@@ -11,7 +11,7 @@ class UserDbRepository(ABC):
         pass
 
     @abstractmethod
-    def get_users(self, type: int or None) -> list[User]:
+    def get_users(self, type: int or None = None) -> list[User]:
         pass
 
     @abstractmethod

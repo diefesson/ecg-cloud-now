@@ -19,10 +19,12 @@ def user_get(user_id):
     else:
         return "user not found", 404
 
+
 @user_blueprint.route("/user/all")
 def user_all():
     users = _user_db.get_users()
     return jsonify([u.__dict__ for u in users])
+
 
 @user_blueprint.route("/user/all/<type>")
 def user_all_of_type(type):
