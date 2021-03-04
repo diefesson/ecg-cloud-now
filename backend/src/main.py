@@ -10,13 +10,13 @@ app: Flask = Flask(__name__)
 app.register_blueprint(sample_blueprint)
 app.register_blueprint(user_blueprint)
 app.register_blueprint(session_blueprint)
-
-CORS(app)
+CORS(app, origin=enviroment.FRONTEND_ORIGIN, supports_credentials=True)
 
 
 @app.route('/')
 def hello():
-    return f"deploy mode: {enviroment.DEPLOY_MODE}"
+    return (f"deploy mode: {enviroment.DEPLOY_MODE}, "
+            f"frontend origin: {enviroment.FRONTEND_ORIGIN}")
 
 
 app.run(enviroment.HTTP_HOST, enviroment.HTTP_PORT)

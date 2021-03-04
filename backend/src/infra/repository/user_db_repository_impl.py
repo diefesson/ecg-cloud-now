@@ -84,6 +84,5 @@ class UserDbRepositoryImpl(UserDbRepository):
         with conn.cursor() as cur:
             cur.execute(_GET_CREDENTIAL, (username,))
             row = cur.fetchone()
-            password_hash = row["password_hash"] if row else None
             self._pool.release(conn)
-            return Credential(username, password_hash)
+            return Credential(username, row["password_hash"]) if row else None
