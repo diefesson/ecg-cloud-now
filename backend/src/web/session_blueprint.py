@@ -44,7 +44,7 @@ def session_current():
     if not session:
         return _make_expired_session_response()
     else:
-        return {"success": True, "session:": session.as_dict()}
+        return {"success": True, "session": session.as_dict()}
 
 
 @session_blueprint.route("/session/logout")
