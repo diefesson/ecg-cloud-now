@@ -1,3 +1,4 @@
+# noinspection PyShadowingBuiltins
 class User:
     user_id: int
     username: str

@@ -26,6 +26,7 @@ def user_all():
     return jsonify([u.__dict__ for u in users])
 
 
+# noinspection PyShadowingBuiltins
 @user_blueprint.route("/user/all/<type>")
 def user_all_of_type(type):
     try:

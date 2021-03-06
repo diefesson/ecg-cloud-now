@@ -11,9 +11,11 @@ _GET_USERS = f"select user_id, {_USER_FIELDS} from user"
 _USERNAME_TO_USER_ID = "select user_id from user where username = %s"
 _ADD_USER = f"insert into user({_USER_FIELDS}, password_hash) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 _HAS_USER = "select user_id from user where username = %s or email = %s"
+_IS_USER_OF_TYPE = "select user_id from user where user_id = %s and type = %s"
 _GET_CREDENTIAL = "select password_hash from user where username = %s"
 
 
+# noinspection PyShadowingBuiltins
 class UserDbRepositoryImpl(UserDbRepository):
     _pool: Pool
 
@@ -78,6 +80,15 @@ class UserDbRepositoryImpl(UserDbRepository):
             exist = cur.fetchone() is not None
             self._pool.release(conn)
             return exist
+
+    def is_user_of_type(self, patient_id: int, type: int) -> bool:
+        values = (patient_id, type)
+        conn = self._pool.get_conn()
+        with conn.cursor() as cur:
+            cur.execute(_IS_USER_OF_TYPE, values)
+            row = cur.fetchone()
+        self._pool.release(conn)
+        return row is not None
 
     def get_credential(self, username: str) -> Credential or None:
         conn = self._pool.get_conn()

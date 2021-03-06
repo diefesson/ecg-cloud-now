@@ -5,3 +5,4 @@ pymysql~=1.0.2
 pymysql-pooling~=1.0.6
 flask-cors~=3.0.10
 marshmallow~=3.10.0
+PyPika~=0.47.7

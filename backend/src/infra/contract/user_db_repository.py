@@ -4,6 +4,7 @@ from domain.entity.user import User
 from domain.entity.credential import Credential
 
 
+# noinspection PyShadowingBuiltins
 class UserDbRepository(ABC):
 
     @abstractmethod
@@ -24,6 +25,10 @@ class UserDbRepository(ABC):
 
     @abstractmethod
     def has_user(self, username: str, email: str) -> bool:
+        pass
+
+    @abstractmethod
+    def is_user_of_type(self, patient_id: int, type: int) -> bool:
         pass
 
     @abstractmethod
