@@ -1,3 +1,5 @@
+from json import JSONDecodeError
+
 from flask import Blueprint, request, make_response
 from marshmallow import ValidationError
 
@@ -17,7 +19,7 @@ _session_db: SessionDbRepository = injector.get(SessionDbRepository)
 def session_create():
     try:
         values = SESSION_CREATE_SCHEMA.loads(request.data)
-    except ValidationError:
+    except ValidationError or JSONDecodeError:
         return "bad request", 400
     username = values["username"]
     password = values["password"]
@@ -35,19 +37,16 @@ def session_create():
     return response
 
 
-@session_blueprint.route("/session/current")
+@session_blueprint.route("/session/current", methods=["GET"])
 def session_current():
-    if "sessionToken" not in request.cookies:
-        return _make_no_session_response()
-    token = request.cookies["sessionToken"]
-    session = _session_db.get_session(token)
+    session = _current_session()
     if not session:
-        return _make_expired_session_response()
+        return {"success": False, "cause": "Invalid session"}, 403
     else:
         return {"success": True, "session": session.as_dict()}
 
 
-@session_blueprint.route("/session/logout")
+@session_blueprint.route("/session/logout", methods=["GET"])
 def session_logout():
     if "sessionToken" not in request.cookies:
         return _make_no_session_response()
@@ -56,6 +55,14 @@ def session_logout():
     response = make_response({"success": True})
     response.set_cookie("sessionToken", "", max_age=0)
     return {"success": True}
+
+
+def _current_session():
+    if "sessionToken" not in request.cookies:
+        return None
+    token = request.cookies["sessionToken"]
+    session = _session_db.get_session(token)
+    return session
 
 
 def _make_expired_session_response():

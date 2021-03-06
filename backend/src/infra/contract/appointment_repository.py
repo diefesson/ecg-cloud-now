@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from domain.entity.appointment import Appointment
+from domain.entity.appointment import Appointment, AppointmentStatus
 
 
 class AppointmentRepository(ABC):
@@ -16,6 +16,10 @@ class AppointmentRepository(ABC):
 
     @abstractmethod
     def remove_appointment(self, appointment_id: int):
+        pass
+
+    @abstractmethod
+    def set_appointment_status(self, appointment_id: int, status: AppointmentStatus):
         pass
 
     @abstractmethod

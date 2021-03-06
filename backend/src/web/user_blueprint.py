@@ -1,3 +1,5 @@
+from json import JSONDecodeError
+
 from flask import Blueprint, request, jsonify
 from marshmallow import ValidationError
 
@@ -10,7 +12,7 @@ user_blueprint = Blueprint("user_blueprint", __name__)
 _user_db: UserDbRepository = injector.get(UserDbRepository)
 
 
-@user_blueprint.route("/user/get/<user_id>")
+@user_blueprint.route("/user/get/<user_id>", methods=["GET"])
 def user_get(user_id):
     user_id = int(user_id)
     user = _user_db.get_user(user_id)
@@ -20,14 +22,14 @@ def user_get(user_id):
         return "user not found", 404
 
 
-@user_blueprint.route("/user/all")
+@user_blueprint.route("/user/all", methods=["GET"])
 def user_all():
     users = _user_db.get_users()
     return jsonify([u.__dict__ for u in users])
 
 
 # noinspection PyShadowingBuiltins
-@user_blueprint.route("/user/all/<type>")
+@user_blueprint.route("/user/all/<type>", methods=["GET"])
 def user_all_of_type(type):
     try:
         type = int(type)
@@ -37,11 +39,11 @@ def user_all_of_type(type):
     return jsonify([u.__dict__ for u in users])
 
 
-@user_blueprint.route("/user/create", methods=["post"])
+@user_blueprint.route("/user/create", methods=["POST"])
 def user_create():
     try:
         values = USER_CREATE_SCHEMA.loads(request.data)
-    except ValidationError:
+    except ValidationError or JSONDecodeError:
         return "bad request", 400
     username = values["username"]
     email = values["email"]
@@ -64,11 +66,11 @@ def user_create():
     return {"success": True}
 
 
-@user_blueprint.route("/user/has_user", methods=["post"])
+@user_blueprint.route("/user/has_user", methods=["POST"])
 def user_has_user():
     try:
         values = USER_HAS_USER_SCHEMA.loads(request.data)
-    except ValidationError:
+    except ValidationError or JSONDecodeError:
         return "bad request", 400
     username = values["username"]
     email = values["email"]
