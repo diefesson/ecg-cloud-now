@@ -3,13 +3,12 @@ import React, { Component } from 'react';
 import './login-paciente.scss';
 import imgPaciente from './44305.png';
 
-import Conjunto from '../conjunto'
-
-import api from '../../service/api';
-
-
+import {
+    BrowserRouter as Router, Switch, Route, Link
+} from "react-router-dom";
 
 
+import api from '../../service/session';
 
 class Login extends Component {
 
@@ -25,21 +24,11 @@ class Login extends Component {
     }
 
     buttonSubmit = () => {
-        api.post(process.env.REACT_APP_ENDPOINT_CREATE_SESSION, this.state.form).then(
-            response => {
-                let data
-                if(response.config.data){
-                        data = this.state.form.username
-                    localStorage.setItem('app-token', data)
-                    alert("Seja bem vindo!")
-                    // History.push(Conjunto)
-                    
-                }
-            }
-        ).catch((error) => {
-            alert("Username ou senha incorretos!")
-            }
-        )
+        try{
+            api.login(this.state.form)
+        }catch(err){
+                console.log(err)
+        }
     }
 
     userChange = async e => {
@@ -64,31 +53,23 @@ class Login extends Component {
                             <div className="login">
                                 <div className="login-email">
                                     <input type="text" name="username"
-                                        placeholder="Nome de Usuário" onChange={this.userChange} />
+                                        placeholder="Nome de Usuário" required onChange={this.userChange} />
                                 </div>
                                 <div className="login-senha">
                                     <input type="password" placeholder="Senha"
-                                        onChange={this.userChange} name="password" />
+                                        onChange={this.userChange} required name="password" />
                                 </div>
                             </div>
                             <div className="botao-entrar">
                                 <button type="submit" onClick={this.buttonSubmit}>ENTRAR</button>
                             </div>
                         </form>
-                        <div className="login-ajuda">
-                            <nav>
-                                <ul>
-                                    <li>Lembre de Mim</li>
-                                    <li>Esqueceu a Senha?</li>
-                                </ul>
-                            </nav>
-                            <div className="botao-selecionar">
-                                <button type="button"></button>
-                            </div>
-                        </div>
                         <div className="cadastro">
                             <h4>Não tem conta?</h4>
-                            <button>CADASTRE-SE</button>
+                            <Link className='reset-link' to='opcao-cadastro'>
+                                <button>CADASTRE-SE</button>
+                            </Link>
+
                         </div>
                     </div>
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import {
-    BrowserRouter as 
-    Link
+    BrowserRouter as Router, Switch, Route, Link
 } from "react-router-dom";
 
 import Menu from '../templates/Menu/Menu'
@@ -43,11 +42,8 @@ export default props => {
                        seja você um médico ou um paciente.</p>
                             </div>
                             <div className='line'>
-                                <Link className='custom-button' type="button" to='login-medico' >
-                                    <span className='route-value'>Sou Médico</span>
-                                </Link>
                                 <Link className='custom-button' type="button" to='login-paciente' >
-                                    <span className='route-value'>Sou Paciente</span>
+                                    <span className='route-value'>Acessar Plataforma</span>
                                 </Link>
                             </div>
                         </div>

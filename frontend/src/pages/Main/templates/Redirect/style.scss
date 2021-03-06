@@ -1,0 +1,31 @@
+.bad-request {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 0.5fr 0.1fr 0.1fr;
+    align-items: flex-end;
+    justify-content: center;
+    justify-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.bad-request h1 {
+    font-size: 7rem;
+    margin: 0;
+    padding: 0;
+}
+
+.redirect-button {
+    background-color: #212121;
+    width: 300px;
+    height: 60px;
+    opacity: 0.8;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    list-style: none;
+    color: #ffff;
+}

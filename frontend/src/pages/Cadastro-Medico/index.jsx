@@ -5,9 +5,6 @@ import {
 
 import api from '../../service/api'
 
-import './cadastro-pacientes.scss'
-
-
 class index extends Component {
 
     constructor(props) {
@@ -17,7 +14,7 @@ class index extends Component {
             email: '',
             name: '',
             phone: '',
-            type: 0,
+            type: 1,
             id_doc: '',
             state: '',
             city: '',
@@ -54,8 +51,6 @@ class index extends Component {
         const username = this.state.username;
         const password = this.state.password;
         const type = this.state.type;
-
-        
 
         api.post(process.env.REACT_APP_ENDPOINT_CREATE_USER,
             { username, email, name, phone, type, id_doc, state, city, district, address, password }).then(() => {
@@ -98,11 +93,11 @@ class index extends Component {
                                 <div className='line'>
                                     <div className='col-50'>
                                         <div className='name-form'>
-                                            <label>CPF</label>
+                                            <label>CRM</label>
                                         </div>
                                         <div className='input-form-two-elements'>
                                             <input required="required" type="text" name="id_doc"
-                                                onChange={this.handleChange} placeholder="_ _ _ . _ _ _ . _ _ _ - _ _" />
+                                                onChange={this.handleChange} placeholder="" />
                                         </div>
                                     </div>
                                     <div className='col-50 '>

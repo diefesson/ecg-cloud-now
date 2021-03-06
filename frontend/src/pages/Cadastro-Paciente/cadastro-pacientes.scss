@@ -11,6 +11,7 @@ $second-color: #ffff;
     background-color: $second-color;
     color: $primary-color;
     margin: auto;
+    margin-top: -10px;
 }
 
 .register-center h2{
@@ -40,6 +41,7 @@ $second-color: #ffff;
 
 .input-form input{
     width: 100%;
+    border-width: 1px;
     padding: 2px;
     border-style: solid;
     border-color: $primary-color;
@@ -66,10 +68,19 @@ $second-color: #ffff;
 
 }
 
+.input-form-two-elements input{
+    width: 100%;
+    padding: 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $primary-color;
+
+}
+
 .input-form-two-elements select{
     width: 100%;
     padding: 2px;
-    border-width: 2px;
+    border-width: 1px;
     border-style: solid;
     border-color: $primary-color;
 
@@ -93,4 +104,8 @@ $second-color: #ffff;
     border-radius: 5px;
     background-color: $primary-color;
     color: $second-color;
+}
+
+.custom-button-register:hover{
+    cursor: pointer;
 }

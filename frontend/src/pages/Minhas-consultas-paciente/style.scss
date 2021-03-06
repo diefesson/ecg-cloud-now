@@ -1,0 +1,35 @@
+.grid-minhas-consultas{
+    display: grid;
+    grid-template-rows: 0.1fr 0.4fr 1.8fr;
+}
+
+.grid-preview{
+    margin: 0;
+    padding: 0;
+    width: 77vw;
+    max-height: 76vh;
+    overflow: auto;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.card-position{
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+::-webkit-scrollbar {
+    width: 3px; 
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffff;
+}
+
+.margin-minhas-consultas{
+    margin-left: 80px;
+}

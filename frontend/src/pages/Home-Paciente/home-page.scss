@@ -1,0 +1,78 @@
+.grid-home-page{
+    width: 100%;
+    display: grid;
+}
+
+.grid-template-rows{
+    grid-template-rows: 0.15fr 0.3fr 1fr;
+}
+
+.username-home{
+    display: flex;
+}
+
+.username-top{
+    margin: 0;
+    margin-right: 5px;
+    padding: 0;
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-top: 3px;
+    margin-left: 900px;
+}
+
+.username-home img{
+    margin-top: 5px;
+}
+
+.faixa-home-paciente{
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    background-color: #ffff;
+    border-radius: 25px;
+    margin: auto;
+    width: 85%;
+    height: 120px;
+    color: black;
+}
+
+.texto-faixa-paciente{
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    margin-left: 80px;
+    font-style: bold;
+}
+
+.alinhamento-textos-faixa{
+    margin-top: 15px;
+}
+
+.conhecer-pacientes-faixa{
+    margin-top: 10px;
+    margin-left: 80px;
+}
+
+.conhecer-pacientes-faixa a{
+    font-size: 1rem;
+    color: #001C81;
+    text-decoration: none;
+}
+
+.img-faixa img{
+    margin-top: -40px;
+}
+
+.img-faixa-paciente img{
+    width: 300px;
+    margin-top: -57px;
+}
+
+.sobre-home{
+    margin-left: 80px;
+}
+
+.sobre-home p{
+    width: 90%;
+}
