@@ -15,4 +15,3 @@ HTTP_PORT = int(getenv("HTTP_PORT", "8080"))
 FRONTEND_ORIGIN = getenv("FRONTEND_ORIGIN", "http://localhost:3000")
 
 DEPLOY_MODE = getenv("DEPLOY_MODE", "dev")
-

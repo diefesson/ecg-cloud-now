@@ -1,31 +1,43 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, request
 
 from app.application import injector
 from domain.entity.sample import Sample
-from infra.contract.sample_db_repository import SampleDbRepository
+from infra.contract.sample_repository import SampleRepository
 
 sample_blueprint = Blueprint('sample_blueprint', __name__)
-_sample_db = injector.get(SampleDbRepository)
+_sample_repository = injector.get(SampleRepository)
 
 
-@sample_blueprint.route('/sample/all')
+@sample_blueprint.route("/sample/all", methods=["GET"])
 def sample_all():
-    return jsonify([s.__dict__ for s in _sample_db.get_all_samples()])
+    patient_id = request.args.get("patient_id")
+    try:
+        if patient_id is not None:
+            patient_id = int(patient_id)
+    except ValueError:
+        return {"success": False, "cause": "Bad request"}, 400
+    samples = _sample_repository.get_all_samples(patient_id)
+    samples = [sample_to_json(s) for s in samples]
+    return {"success": True, "samples": samples}
 
 
-@sample_blueprint.route('/sample/get/<sample_id>')
+@sample_blueprint.route("/sample/<sample_id>", methods=["GET"])
 def sample_get(sample_id):
-    sample_id = int(sample_id)
-    sample: Sample = _sample_db.get_sample(sample_id)
-    if sample:
-        return sample.__dict__
-    else:
-        return "sample not found", 404
+    try:
+        sample_id = int(sample_id)
+    except ValueError:
+        return {"success": False, "cause": "Bad request"}, 400
+    sample: Sample = _sample_repository.get_sample(sample_id)
+    if not sample:
+        return {"success": False, "cause": "Not found"}, 404
+    return {"success": True, "sample": sample_to_json(sample)}
 
 
-@sample_blueprint.route('/sample/of_patient/<user_id>')
-@sample_blueprint.route('/sample/of_user/<user_id>')
-def sample_of_user(user_id):
-    user_id = int(user_id)
-    samples = _sample_db.get_samples_of_patient(user_id)
-    return jsonify([s.__dict__ for s in samples])
+def sample_to_json(sample: Sample):
+    return {
+        "sampleId": sample.sample_id,
+        "patientId": sample.patient_id,
+        "timestamp": sample.timestamp,
+        "frequency": sample.frequency,
+        "data": sample.raw
+    }
