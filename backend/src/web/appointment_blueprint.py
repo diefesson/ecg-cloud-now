@@ -7,7 +7,7 @@ from infra.contract.appointment_repository import AppointmentRepository
 
 from app.application import injector
 from infra.contract.user_repository import UserRepository
-from web.validatation.appointment_validations import appointment_create_schema, appointment_set_status_schema
+from web.validatation.appointment_validations import appointment_create_schema
 
 appointment_blueprint = Blueprint("appointment_blueprint", __name__)
 _appointment_repository = injector.get(AppointmentRepository)
