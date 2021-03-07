@@ -1,0 +1,444 @@
+openapi: 3.0.0
+info:
+  title: "ECN Backend"
+  version: "0.0.1"
+components:
+  securitySchemes:
+    userAuth:
+      type: apiKey
+      name: "SESSION_TOKEN"
+      in: cookie
+  schemas:
+    userType: &userType
+      type: integer
+      enum: [0, 1]
+      description: "0 for patient, 1 for medic"
+    appointmentStatus: &appointmentStatus
+      type: integer
+      enum: [0, 1]
+      description: "0 for pending, 1 for done"
+    failResponse: &failResponse
+      type: object
+      properties:
+        success:
+          type: boolean
+          enum: [false]
+          example: false
+        cause:
+          type: string
+    sample: &sample
+      type: object
+      properties:
+        sampleId:
+          type: integer
+        patientId:
+          type: integer
+        timestamp:
+          type: integer
+        raw:
+          type: string
+    user: &user
+      type: object
+      properties:
+        userId:
+          type: integer
+        username:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        phone:
+          type: string
+        type: *userType
+        idDoc:
+          type: string
+          description: "RG for patients, CRM for medics"
+        state:
+          type: string
+          example: "CE"
+        city:
+          type: string
+        district:
+          type: string
+    session: &session
+      type: object
+      properties:
+        token:
+          type: string
+          example: "jDsHd5ab9288JMv8ZXci8SMlZvURXMmGNb2e36udWKs="
+        userId:
+          type: integer
+        expire:
+          type: string
+          description: "ISO formated timestamp"
+          example: "2021-03-18-14:30:00Z"
+    appointment: &appointment
+      type: object
+      properties:
+        appointmentId:
+          type: integer
+        medicId:
+          type: integer
+        patientId:
+          type: integer
+        status: *appointmentStatus
+paths:
+  /sample/{sample_id}:
+    get:
+      summary: Get sample by id
+      tags:
+        - sample
+      parameters:
+        - name: sample_id
+          in: path
+          required: true
+          schema:
+           type: integer
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  sample: *sample
+        400:
+          description: "Bad request"
+          content:
+            application/json:
+              schema: *failResponse
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema: *failResponse
+  /sample/all:
+    get:
+      summary: "Get all samples"
+      description: "Can filter by patient"
+      tags:
+        - sample
+      parameters:
+        - name: patient_id
+          in: query
+          schema:
+            type: integer
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  samples:
+                    type: array
+                    items: *sample
+        400:
+          description: "Bad request"
+          content:
+            application/json:
+              schema: *failResponse
+  /user/{user_id}/:
+    get:
+      summary: "Get user by id"
+      tags:
+        - user
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  user: *user
+        400:
+          description: "Bad request"
+          content:
+            application/json:
+              schema: *failResponse
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema: *failResponse
+  /user/all:
+    get:
+      summary: "Get all users"
+      description: "Can filter by type"
+      tags:
+        - user
+      parameters:
+        - name: type
+          in: query
+          schema: *userType
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  users:
+                    type: array
+                    items: *user
+        400:
+          description: "Bad request"
+          content:
+            application/json:
+              schema: *failResponse
+  /user:
+    post:
+      summary: "Adds a new user"
+      tags: [user]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf: [*user]
+              properties:
+                name:
+                  type: string
+                
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        400:
+          description: "Bad request"
+          content:
+            application/json:
+              schema: *failResponse
+        409:
+          description: "Username or email already in use"
+          content:
+            application/json:
+              schema: *failResponse
+  /user/has-user/{username}/{email}:
+    get:
+      summary: "Checks if the given username or emails are in use"
+      tags: [user]
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: email
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  exists:
+                    type: boolean
+        400:
+          description: "Bad request"
+          content:
+            application/json:
+              schema: *failResponse
+  /session:
+    post:
+      summary: "Starts a new user session"
+      tags: [session]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  session: *session
+        400:
+          description: "Bad request"
+          content:
+            application/json:
+              schema: *failResponse
+        403:
+          description: "Invalid username or passsword"
+          content:
+            application/json:
+              schema: *failResponse
+    get:
+      summary: "Gets the current session data"
+      tags: [session]
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  session: *session
+        403:
+          description: "Invalid session"
+          content:
+            application/json:
+              schema: *failResponse
+    delete:
+      summary: "Log out of the current session"
+      tags: [session]
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        403:
+          description: "Invalid session"
+          content:
+            application/json:
+              schema: *failResponse
+  /appointment:
+    post:
+      summary: "Adds a new appointment"
+      tags: [appointment]
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        400:
+          description: "Bad request, invalid patient or medic"
+          content:
+            application/json:
+              schema: *failResponse
+  /appointment/{appointment_id}:
+    delete:
+      summary: "Deletes a appointment"
+      tags: [appointment]
+      parameters: 
+        - name: appointment_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200: 
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        400:
+          description: "Bad request"
+          content:
+            application/json:
+              schema: *failResponse
+    get:
+      summary: "Deletes a appointment"
+      tags: [appointment]
+      parameters: 
+        - name: appointment_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200: 
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  appointment: *appointment
+        400:
+          description: "Bad request"
+          content:
+            application/json:
+              schema: *failResponse
+  /appointment/all:
+    get:
+      summary: "List all appoinments"
+      description: "Can also filter by patient and medic"
+      tags: [appointment]
+      parameters: 
+        - name: medic_id
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: patient_id
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad request"
+          content:
+            application/json:
+              schema: *failResponse
+      
+      
+      
+      
+      
+      
+      
