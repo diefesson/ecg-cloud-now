@@ -2,6 +2,9 @@ openapi: 3.0.0
 info:
   title: "ECN Backend"
   version: "0.0.1"
+servers:
+  - url: "http://localhost:8080"
+    description: "Default local"
 components:
   securitySchemes:
     userAuth:
@@ -9,15 +12,15 @@ components:
       name: "SESSION_TOKEN"
       in: cookie
   schemas:
-    userType: &userType
+    userType:
       type: integer
       enum: [0, 1]
       description: "0 for patient, 1 for medic"
-    appointmentStatus: &appointmentStatus
+    appointmentStatus:
       type: integer
       enum: [0, 1]
       description: "0 for pending, 1 for done"
-    failResponse: &failResponse
+    failResponse:
       type: object
       properties:
         success:
@@ -26,7 +29,7 @@ components:
           example: false
         cause:
           type: string
-    sample: &sample
+    sample:
       type: object
       properties:
         sampleId:
@@ -37,7 +40,7 @@ components:
           type: integer
         raw:
           type: string
-    user: &user
+    user:
       type: object
       properties:
         userId:
@@ -50,7 +53,8 @@ components:
           type: string
         phone:
           type: string
-        type: *userType
+        type:
+          $ref: "#/components/schemas/userType"
         idDoc:
           type: string
           description: "RG for patients, CRM for medics"
@@ -61,7 +65,9 @@ components:
           type: string
         district:
           type: string
-    session: &session
+        address:
+          type: string
+    session:
       type: object
       properties:
         token:
@@ -73,8 +79,7 @@ components:
           type: string
           description: "ISO formated timestamp"
           example: "2021-03-18-14:30:00Z"
-    appointment: &appointment
-      type: object
+    appointment:
       properties:
         appointmentId:
           type: integer
@@ -82,7 +87,8 @@ components:
           type: integer
         patientId:
           type: integer
-        status: *appointmentStatus
+        status: 
+          $ref: "#/components/schemas/appointmentStatus"
 paths:
   /sample/{sample_id}:
     get:
@@ -105,17 +111,20 @@ paths:
                 properties:
                   success:
                     type: boolean
-                  sample: *sample
+                  sample:
+                    $ref: "#/components/schemas/sample"
         400:
           description: "Bad request"
           content:
             application/json:
-              schema: *failResponse
+              schema:
+                $ref: "#/components/schemas/failResponse"
         404:
           description: "Not found"
           content:
             application/json:
-              schema: *failResponse
+              schema:
+                $ref: "#/components/schemas/failResponse"
   /sample/all:
     get:
       summary: "Get all samples"
@@ -139,12 +148,14 @@ paths:
                     type: boolean
                   samples:
                     type: array
-                    items: *sample
+                    items:
+                      $ref: "#/components/schemas/sample"
         400:
           description: "Bad request"
           content:
             application/json:
-              schema: *failResponse
+              schema: 
+                $ref: "#/components/schemas/failResponse"
   /user/{user_id}/:
     get:
       summary: "Get user by id"
@@ -166,17 +177,20 @@ paths:
                 properties:
                   success:
                     type: boolean
-                  user: *user
+                  user:
+                    $ref: "#/components/schemas/user"
         400:
           description: "Bad request"
           content:
             application/json:
-              schema: *failResponse
+              schema:
+                $ref: "#/components/schemas/failResponse"
         404:
           description: "Not found"
           content:
             application/json:
-              schema: *failResponse
+              schema:
+                $ref: "#/components/schemas/failResponse"
   /user/all:
     get:
       summary: "Get all users"
@@ -186,7 +200,8 @@ paths:
       parameters:
         - name: type
           in: query
-          schema: *userType
+          schema:
+            $ref: "#/components/schemas/userType"
       responses:
         200:
           description: "OK"
@@ -199,12 +214,14 @@ paths:
                     type: boolean
                   users:
                     type: array
-                    items: *user
+                    items:
+                      $ref: "#/components/schemas/failResponse"
         400:
           description: "Bad request"
           content:
             application/json:
-              schema: *failResponse
+              schema:
+                $ref: "#/components/schemas/failResponse"
   /user:
     post:
       summary: "Adds a new user"
@@ -213,9 +230,9 @@ paths:
         content:
           application/json:
             schema:
-              allOf: [*user]
+              allOf: [$ref: "#/components/schemas/user"]
               properties:
-                name:
+                password:
                   type: string
                 
       responses:
@@ -232,12 +249,14 @@ paths:
           description: "Bad request"
           content:
             application/json:
-              schema: *failResponse
+              schema:
+                $ref: "#/components/schemas/failResponse"
         409:
           description: "Username or email already in use"
           content:
             application/json:
-              schema: *failResponse
+              schema:
+                $ref: "#/components/schemas/failResponse"
   /user/has-user/{username}/{email}:
     get:
       summary: "Checks if the given username or emails are in use"
@@ -269,7 +288,8 @@ paths:
           description: "Bad request"
           content:
             application/json:
-              schema: *failResponse
+              schema:
+                $ref: "#/components/schemas/failResponse"
   /session:
     post:
       summary: "Starts a new user session"
@@ -294,20 +314,25 @@ paths:
                 properties:
                   success:
                     type: boolean
-                  session: *session
+                  session:
+                    $ref: "#/components/schemas/session"
         400:
           description: "Bad request"
           content:
             application/json:
-              schema: *failResponse
+              schema:
+                $ref: "#/components/schemas/failResponse"
         403:
           description: "Invalid username or passsword"
           content:
             application/json:
-              schema: *failResponse
+              schema: 
+                $ref: "#/components/schemas/failResponse"
     get:
       summary: "Gets the current session data"
       tags: [session]
+      security:
+        - userAuth: []
       responses:
         200:
           description: "OK"
@@ -318,15 +343,19 @@ paths:
                 properties:
                   success:
                     type: boolean
-                  session: *session
+                  session:
+                    $ref: "#/components/schemas/session"
         403:
           description: "Invalid session"
           content:
             application/json:
-              schema: *failResponse
+              schema:
+                $ref: "#/components/schemas/failResponse"
     delete:
       summary: "Log out of the current session"
       tags: [session]
+      security:
+        - userAuth: []
       responses:
         200:
           description: "OK"
@@ -341,11 +370,17 @@ paths:
           description: "Invalid session"
           content:
             application/json:
-              schema: *failResponse
+              schema: 
+                $ref: "#/components/schemas/failResponse"
   /appointment:
     post:
       summary: "Adds a new appointment"
       tags: [appointment]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/appointment"
       responses:
         200:
           description: "OK"
@@ -360,7 +395,8 @@ paths:
           description: "Bad request, invalid patient or medic"
           content:
             application/json:
-              schema: *failResponse
+              schema:
+                $ref: "#/components/schemas/failResponse"
   /appointment/{appointment_id}:
     delete:
       summary: "Deletes a appointment"
@@ -385,7 +421,8 @@ paths:
           description: "Bad request"
           content:
             application/json:
-              schema: *failResponse
+              schema:
+                $ref: "#/components/schemas/failResponse"
     get:
       summary: "Deletes a appointment"
       tags: [appointment]
@@ -405,12 +442,14 @@ paths:
                 properties:
                   success:
                     type: boolean
-                  appointment: *appointment
+                  appointment: 
+                    $ref: "#/components/schemas/appointment"
         400:
           description: "Bad request"
           content:
             application/json:
-              schema: *failResponse
+              schema: 
+                $ref: "#/components/schemas/failResponse"
   /appointment/all:
     get:
       summary: "List all appoinments"
@@ -430,11 +469,18 @@ paths:
       responses:
         200:
           description: "OK"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/appointment"
         400:
           description: "Bad request"
           content:
             application/json:
-              schema: *failResponse
+              schema:
+                $ref: "#/components/schemas/failResponse"
       
       
       
