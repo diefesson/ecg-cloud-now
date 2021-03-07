@@ -43,7 +43,7 @@ def user_create():
     try:
         values = USER_CREATE_SCHEMA.loads(request.data)
     except ValidationError or JSONDecodeError as e:
-        return {"success": False, "cause": e.messages.__str__()}, 400
+        return {"success": False, "cause": "Bad request"}, 400
     password = values["password"]
     user = json_to_user(values)
     if _user_repository.has_user(user.username, user.email):

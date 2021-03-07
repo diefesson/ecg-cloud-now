@@ -115,7 +115,7 @@ class UserDbRepositoryImpl(UserRepository):
             user.email,
             user.name,
             user.phone,
-            user.type,
+            user.type.value,
             user.id_doc,
             user.state,
             user.city,

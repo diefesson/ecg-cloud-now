@@ -25,7 +25,7 @@ class AppointmentRepositoryImpl(AppointmentRepository):
         self._pool = pool
 
     def add_appointment(self, appointment: Appointment):
-        values = (appointment.medic_id, appointment.patient_id, appointment.status)
+        values = (appointment.medic_id, appointment.patient_id, appointment.status.value)
         conn = self._pool.get_conn()
         with conn.cursor() as cur:
             cur.execute(_insert.get_sql(), values)
@@ -39,7 +39,7 @@ class AppointmentRepositoryImpl(AppointmentRepository):
             cur.execute(query.get_sql(), values)
             row = cur.fetchone()
         self._pool.release(conn)
-        return Appointment.from_row(row) if row else None
+        return self.row_to_appointment(row) if row else None
 
     def remove_appointment(self, appointment_id: int):
         values = (appointment_id,)
@@ -69,4 +69,11 @@ class AppointmentRepositoryImpl(AppointmentRepository):
             cur.execute(query.get_sql(), values)
             rows = cur.fetchall()
         self._pool.release(conn)
-        return [Appointment.from_row(r) for r in rows]
+        return [self.row_to_appointment(r) for r in rows]
+
+    @staticmethod
+    def row_to_appointment(row: dict) -> Appointment:
+        return Appointment(appointment_id=row["appointment_id"],
+                           medic_id=row["medic_id"],
+                           patient_id=row["patient_id"],
+                           status=AppointmentStatus(row["status"]))

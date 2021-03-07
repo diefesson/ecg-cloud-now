@@ -25,10 +25,3 @@ class Appointment:
             "patientId": self.medic_id,
             "status": self.status.value
         }
-
-    @classmethod
-    def from_row(cls, row):
-        return cls(appointment_id=row["appointment_id"],
-                   medic_id=row["medic_id"],
-                   patient_id=row["patient_id"],
-                   status=row["status"])
