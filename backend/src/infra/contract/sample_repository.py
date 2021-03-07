@@ -1,19 +1,16 @@
 from abc import ABC
 from abc import abstractmethod
+from typing import Optional
 
 from domain.entity.sample import Sample
 
 
-class SampleDbRepository(ABC):
+class SampleRepository(ABC):
 
     @abstractmethod
-    def get_all_samples(self) -> list[Sample]:
+    def get_all_samples(self, patient_id: Optional[int]) -> list[Sample]:
         pass
 
     @abstractmethod
     def get_sample(self, sample_id: int) -> Sample or None:
-        pass
-
-    @abstractmethod
-    def get_samples_of_patient(self, patient_id: int) -> list[Sample]:
         pass

@@ -1,16 +1,17 @@
 from abc import ABC, abstractmethod
+from typing import Optional
 
 from domain.entity.session import Session
 
 
-class SessionDbRepository(ABC):
+class SessionRepository(ABC):
 
     @abstractmethod
     def add_session(self, login: Session):
         pass
 
     @abstractmethod
-    def get_session(self, token: str) -> Session or None:
+    def get_session(self, token: str) -> Optional[Session]:
         pass
 
     @abstractmethod

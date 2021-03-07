@@ -24,14 +24,6 @@ class Session:
         if self.expire.tzinfo is None:
             self.expire = self.expire.astimezone(timezone.utc)
 
-    def as_dict(self):
-        iso_expire = self.expire.isoformat()
-        return {**self.__dict__, "expire": iso_expire}
-
     def expired(self) -> bool:
         print(self.expire)
         return self.expire < datetime.now(timezone.utc)
-
-    @classmethod
-    def from_row(cls, row):
-        return cls(row["user_id"], row["token"], row["expire"])

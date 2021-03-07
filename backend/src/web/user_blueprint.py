@@ -1,79 +1,89 @@
 from json import JSONDecodeError
 
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request
 from marshmallow import ValidationError
 
 from app.application import injector
-from domain.entity.user import User
-from infra.contract.user_db_repository import UserDbRepository
-from web.validatation.user_validation import USER_CREATE_SCHEMA, USER_HAS_USER_SCHEMA
+from domain.entity.user import User, UserType
+from infra.contract.user_repository import UserRepository
+from web.validatation.user_validation import USER_CREATE_SCHEMA
 
 user_blueprint = Blueprint("user_blueprint", __name__)
-_user_db: UserDbRepository = injector.get(UserDbRepository)
+_user_repository = injector.get(UserRepository)
 
 
-@user_blueprint.route("/user/get/<user_id>", methods=["GET"])
+@user_blueprint.route("/user/<user_id>", methods=["GET"])
 def user_get(user_id):
-    user_id = int(user_id)
-    user = _user_db.get_user(user_id)
-    if user:
-        return user.__dict__
-    else:
-        return "user not found", 404
-
-
-@user_blueprint.route("/user/all", methods=["GET"])
-def user_all():
-    users = _user_db.get_users()
-    return jsonify([u.__dict__ for u in users])
+    try:
+        user_id = int(user_id)
+    except ValueError:
+        return {"success": False, "cause": "Bad request"}, 400
+    user = _user_repository.get_user(user_id)
+    if not user:
+        return {"success": False, "cause": "Not found"}, 404
+    return {"success": True, "user": user_to_json(user)}
 
 
 # noinspection PyShadowingBuiltins
-@user_blueprint.route("/user/all/<type>", methods=["GET"])
-def user_all_of_type(type):
+@user_blueprint.route("/user/all", methods=["GET"])
+def user_all():
+    type = request.args.get("type")
     try:
-        type = int(type)
+        if type is not None:
+            type = UserType(int(type))
     except ValueError:
-        return "bad request", 400
-    users = _user_db.get_users(type)
-    return jsonify([u.__dict__ for u in users])
+        return {"success": False, "cause": "Bad request"}, 400
+    users = _user_repository.get_users(type)
+    users = [user_to_json(u) for u in users]
+    return {"success": True, "users": users}
 
 
-@user_blueprint.route("/user/create", methods=["POST"])
+@user_blueprint.route("/user", methods=["POST"])
 def user_create():
     try:
         values = USER_CREATE_SCHEMA.loads(request.data)
-    except ValidationError or JSONDecodeError:
-        return "bad request", 400
-    username = values["username"]
-    email = values["email"]
+    except ValidationError or JSONDecodeError as e:
+        return {"success": False, "cause": e.messages.__str__()}, 400
     password = values["password"]
-    if _user_db.has_user(username, email):
-        return {"success": False, "cause": "user_already_exists"}
-    user = User(
-        values["username"],
-        values["email"],
-        values["name"],
-        values["phone"],
-        values["type"],
-        values["id_doc"],
-        values["state"],
-        values["city"],
-        values["district"],
-        values["address"]
-    )
-    _user_db.add_user(user, password)
+    user = json_to_user(values)
+    if _user_repository.has_user(user.username, user.email):
+        return {"success": False, "cause": "Username or email already in use"}, 409
+    _user_repository.add_user(user, password)
     return {"success": True}
 
 
-@user_blueprint.route("/user/has_user", methods=["POST"])
-def user_has_user():
-    try:
-        values = USER_HAS_USER_SCHEMA.loads(request.data)
-    except ValidationError or JSONDecodeError:
-        return "bad request", 400
-    username = values["username"]
-    email = values["email"]
-    exists = _user_db.has_user(username, email)
-    return {"exists": exists}
+@user_blueprint.route("/user/has-user/<username>/<email>", methods=["GET"])
+def user_has_user(username, email):
+    exists = _user_repository.has_user(username, email)
+    return {"success": True, "exists": exists}
 
+
+def user_to_json(user: User):
+    return {
+        "userId": user.user_id,
+        "username": user.username,
+        "email": user.email,
+        "name": user.name,
+        "phone": user.phone,
+        "type": user.type,
+        "idDoc": user.id_doc,
+        "state": user.state,
+        "city": user.city,
+        "district": user.district,
+        "address": user.address,
+    }
+
+
+def json_to_user(json: dict):
+    return User(
+        json["username"],
+        json["email"],
+        json["name"],
+        json["phone"],
+        UserType(json["type"]),
+        json["idDoc"],
+        json["state"],
+        json["city"],
+        json["district"],
+        json["address"]
+    )

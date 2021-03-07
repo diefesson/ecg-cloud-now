@@ -1,22 +1,23 @@
 from abc import ABC, abstractmethod
+from typing import Optional
 
-from domain.entity.user import User
+from domain.entity.user import User, UserType
 from domain.entity.credential import Credential
 
 
 # noinspection PyShadowingBuiltins
-class UserDbRepository(ABC):
+class UserRepository(ABC):
 
     @abstractmethod
     def get_user(self, user_id: int) -> User or None:
         pass
 
     @abstractmethod
-    def get_users(self, type: int or None = None) -> list[User]:
+    def get_users(self, type: Optional[UserType] = None) -> list[User]:
         pass
 
     @abstractmethod
-    def username_to_user_id(self, username: str) -> User or None:
+    def username_to_user_id(self, username: str) -> Optional[int]:
         pass
 
     @abstractmethod
@@ -28,7 +29,7 @@ class UserDbRepository(ABC):
         pass
 
     @abstractmethod
-    def is_user_of_type(self, patient_id: int, type: int) -> bool:
+    def is_user_of_type(self, user_id: int, type: UserType) -> bool:
         pass
 
     @abstractmethod

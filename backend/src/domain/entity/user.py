@@ -1,3 +1,15 @@
+from enum import Enum
+
+
+class UserType(Enum):
+    PATIENT = 0
+    MEDIC = 1
+
+    @classmethod
+    def has_value(cls, value: int) -> bool:
+        return value in (ut.value for ut in cls)
+
+
 # noinspection PyShadowingBuiltins
 class User:
     user_id: int
@@ -5,7 +17,7 @@ class User:
     email: str
     name: str
     phone: str
-    type: int
+    type: UserType
     id_doc: str
     state: str
     city: str
@@ -13,7 +25,7 @@ class User:
     address: str
 
     def __init__(self, username: str, email: str, name: str, phone: str,
-                 type: int, id_doc: str, state: str, city: str,
+                 type: UserType, id_doc: str, state: str, city: str,
                  district: str, address: str, user_id: int = None
                  ):
         self.user_id = user_id
@@ -27,19 +39,3 @@ class User:
         self.city = city
         self.district = district
         self.address = address
-
-    @classmethod
-    def from_row(cls, row):
-        return cls(
-            user_id=row["user_id"],
-            username=row["username"],
-            email=row["email"],
-            name=row["name"],
-            phone=row["phone"],
-            type=row["type"],
-            id_doc=row["id_doc"],
-            state=row["state"],
-            city=row["city"],
-            district=row["district"],
-            address=row["address"],
-        )
