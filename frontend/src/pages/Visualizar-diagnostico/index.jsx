@@ -3,7 +3,7 @@ import React from 'react'
 import './style.scss'
 
 import Menu from '../Main/templates/Menu-Vertical/paciente/Menu-Vertical'
-import Card from '../Main/templates/Cards/Minhas-consultas/index'
+import Card from '../Main/templates/Cards/Cards'
 import Logout from '../Main/templates/Logout/index'
 import BadRequest from '../Main/templates/Redirect/index'
 
@@ -15,45 +15,45 @@ export default props => {
         return (
             <div className='flex'>
                 <Menu />
-                <div className='grid-minhas-consultas'>
+                <div className='grid-visualizar-diagnostico'>
                     <div>
                         <Logout />
                     </div>
-                    <div className='margin-minhas-consultas'>
-                        <h2>Minhas consultas</h2>
+                    <div className='margin-visualizar-diagnostico'>
+                        <h2>Diagnósticos Recebidos</h2>
                     </div>
-                    <div className='grid-preview grid-consultas'>
-                        <div className='card-position-consultas'>
+                    <div className='grid-preview grid'>
+                        <div className='card-position'>
                             <Card />
                         </div>
-                        <div className='card-position-consultas'>
+                        <div className='card-position'>
                             <Card />
                         </div>
-                        <div className='card-position-consultas'>
+                        <div className='card-position'>
                             <Card />
                         </div>
-                        <div className='card-position-consultas'>
+                        <div className='card-position'>
                             <Card />
                         </div>
-                        <div className='card-position-consultas'>
+                        <div className='card-position'>
                             <Card />
                         </div>
-                        <div className='card-position-consultas'>
+                        <div className='card-position'>
                             <Card />
                         </div>
-                        <div className='card-position-consultas'>
+                        <div className='card-position'>
                             <Card />
                         </div>
-                        <div className='card-position-consultas'>
+                        <div className='card-position'>
                             <Card />
                         </div>
-                        <div className='card-position-consultas'>
+                        <div className='card-position'>
                             <Card />
                         </div>
-                        <div className='card-position-consultas'>
+                        <div className='card-position'>
                             <Card />
                         </div>
-                        <div className='card-position-consultas'>
+                        <div className='card-position'>
                             <Card />
                         </div>
                     </div>

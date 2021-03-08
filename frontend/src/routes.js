@@ -10,6 +10,8 @@ import Homemedico from './pages/Home-Medico/index';
 import Homepaciente from './pages/Home-Paciente/index';
 import Agendar from './pages/Agendar-consulta/index';
 import ConsultasPaciente from './pages/Minhas-consultas-paciente/index';
+import VisualizarDiagnostico from './pages/Visualizar-diagnostico/index';
+import DetalhesConsulta from './pages/Minhas-consultas-paciente/click-card/index';
 
 import Card from './pages/Main/templates/Cards/Cards';
 import Test from './pages/Test';
@@ -32,6 +34,8 @@ function Routes () {
                 <Route path="/home-paciente" component={Homepaciente}></Route>
                 <Route path="/agendar" component={Agendar}></Route>
                 <Route path="/minhas-consultas-paciente" component={ConsultasPaciente}></Route>
+                <Route path="/visualizar-diagnostico" component={VisualizarDiagnostico}></Route>
+                <Route path="/detalhes-consulta" component={DetalhesConsulta}></Route>
 
 
                                 {/* Vai sair */}

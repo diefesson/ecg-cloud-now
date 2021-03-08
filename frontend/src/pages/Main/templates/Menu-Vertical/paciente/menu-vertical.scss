@@ -16,6 +16,7 @@ $color-background: #437F8C;
 
 .menu-vertical ul li{
     position: relative;
+    width: 100%;
 }
 
 .menu-vertical ul li a {
@@ -49,4 +50,11 @@ $color-background: #437F8C;
 
  .lado{
      margin-left: 300px;
+ }
+
+ .reset-link-menu{
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+    color: #ffff;
  }

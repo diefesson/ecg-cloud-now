@@ -9,18 +9,20 @@ SuperTokensRequest.init({
 });
 
 const findById = async (user_id) => {
-    const response = await api.get("http://localhost:8092/user/get/" + user_id).
+    const response = await api.get("http://localhost:8092/user/" + user_id).
 then().catch();
 
-localStorage.setItem('username', response.data.username)
+localStorage.setItem('username', response.data.user.username)
 localStorage.setItem('session', true)
 
- const type = response.data.type;
+ const type = response.data.user.type;
 
  if(type===0){
+    localStorage.setItem('type', 0)
     window.location.replace("/home-paciente");
  }
  if(type===1){
+    localStorage.setItem('type', 1)
     window.location.replace("/home-medico");
  }
 }
@@ -31,7 +33,7 @@ const componentDidMount = async function () {
     then(
     ).catch();
     
-    findById(response.data.session.user_id);
+    findById(response.data.session.userId);
 }
 
 export default {
@@ -44,7 +46,7 @@ export default {
     },
 
     logout: () => {
-        return api.get(process.env.REACT_APP_ENDPOINT_USER_LOGOUT)
+        return api.delete(process.env.REACT_APP_ENDPOINT_USER_LOGOUT)
     },
 
     redirect: () => {

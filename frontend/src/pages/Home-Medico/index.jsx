@@ -8,8 +8,9 @@ import BadRequest from '../Main/templates/Redirect/index'
 
 
 export default props => {
-    console.log(localStorage.getItem('session'))
-    if (localStorage.getItem('session') === true) {
+    const session = localStorage.getItem('session')
+    const type = localStorage.getItem("type")
+    if (session === "true" &&  type === '1') {
         return (
             <div className='flex'>
                 <Menu />
@@ -48,7 +49,7 @@ accumsan. Fusce ullamcorper pharetra ipsum id congue.</p>
             </div>
         )
     }
-    if(localStorage.getItem('session') != true){
+    if(session != "true" || type === '0'){
         return (
             <BadRequest/>
         )

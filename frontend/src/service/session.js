@@ -22,15 +22,13 @@ export default{
             alert("Seja bem vindo!!");
             
         }
-        if(data.success != true){
-            alert("Username ou senha incorretos!!")
+       else{
+            // alert("Username ou senha incorretos!!")
         }
     } catch (err) {
-        if (err.response !== undefined && err.response.status === 401) {
-            // window.location.href = "/";
-        } else {
-            // window.location.href = "/";
-        }
+        if (err.response !== undefined && err.response.status === 401 || err.response.status === 403) {
+            alert("Username ou senha incorretos!!")
+        } 
     }
 },
 }

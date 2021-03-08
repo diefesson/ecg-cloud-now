@@ -1,4 +1,4 @@
-.grid-minhas-consultas{
+.grid-visualizar-diagnostico{
     display: grid;
     grid-template-rows: 0.1fr 0.4fr 1.8fr;
 }
@@ -11,14 +11,14 @@
     overflow: auto;
 }
 
-.grid-consultas{
+.grid{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
-.card-position-consultas{
-    margin-left: 80px;
-    margin-bottom: 100px;
+.card-position{
+    margin: auto;
+    margin-bottom: 50px;
 }
 
 ::-webkit-scrollbar {
@@ -30,6 +30,6 @@
     background: #ffff;
 }
 
-.margin-minhas-consultas{
+.margin-visualizar-diagnostico{
     margin-left: 80px;
 }

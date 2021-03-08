@@ -5,6 +5,7 @@ import {
 
 import api from '../../service/api'
 
+
 class index extends Component {
 
     constructor(props) {
@@ -15,10 +16,10 @@ class index extends Component {
             name: '',
             phone: '',
             type: 1,
-            id_doc: '',
+            idDoc: '',
             state: '',
             city: '',
-            id_doc: '',
+            idDoc: '',
             address: '',
             password: '',
             confirmPass: '',
@@ -42,7 +43,7 @@ class index extends Component {
     handleAdd() {
         const name = this.state.name;
         const phone = this.state.phone;
-        const id_doc = this.state.id_doc;
+        const idDoc = this.state.idDoc;
         const address = this.state.address;
         const state = this.state.state;
         const city = this.state.city;
@@ -52,8 +53,10 @@ class index extends Component {
         const password = this.state.password;
         const type = this.state.type;
 
+        
+
         api.post(process.env.REACT_APP_ENDPOINT_CREATE_USER,
-            { username, email, name, phone, type, id_doc, state, city, district, address, password }).then(() => {
+            { username, email, name, phone, type, idDoc, state, city, district, address, password }).then(() => {
                 alert("Conta criada com sucesso!!")
                 window.location.replace('/login-paciente')
             }
@@ -96,8 +99,8 @@ class index extends Component {
                                             <label>CRM</label>
                                         </div>
                                         <div className='input-form-two-elements'>
-                                            <input required="required" type="text" name="id_doc"
-                                                onChange={this.handleChange} placeholder="" />
+                                            <input required="required" type="text" name="idDoc"
+                                                onChange={this.handleChange} />
                                         </div>
                                     </div>
                                     <div className='col-50 '>

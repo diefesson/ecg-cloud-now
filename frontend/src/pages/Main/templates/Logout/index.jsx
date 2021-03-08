@@ -12,7 +12,7 @@ export default props=> {
 
     return(
         <div className='username-home'>
-                    <p className="username-top">posição </p>
+                    <p className="username-top-logout">{localStorage.getItem('username')} </p>
                     <a href="/login-paciente" onClick={logout}> <img src={Logout} alt="Logout" /></a>
         </div>
     )
