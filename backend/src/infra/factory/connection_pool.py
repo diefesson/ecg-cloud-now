@@ -7,5 +7,6 @@ connection_pool = Pool(
     db=MYSQL_SCHEMA,
     user=MYSQL_USER,
     password=MYSQL_PASSWORD,
-    autocommit=True
+    autocommit=True,
+    ping_check=True
 )
