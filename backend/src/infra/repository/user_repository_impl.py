@@ -91,7 +91,7 @@ class UserDbRepositoryImpl(UserRepository):
     def is_user_of_type(self, user_id: int, type: UserType) -> bool:
         parameters = (user_id, type.value)
         conn = self._pool.get_conn()
-        with conn.cursor as cur:
+        with conn.cursor() as cur:
             cur.execute(str(_select_user_by_id_and_type), parameters)
             row = cur.fetchone()
         self._pool.release(conn)
