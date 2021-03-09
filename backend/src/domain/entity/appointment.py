@@ -17,11 +17,3 @@ class Appointment:
         self.medic_id = medic_id
         self.patient_id = patient_id
         self.status = status if isinstance(status, AppointmentStatus) else AppointmentStatus(status)
-
-    def json_dict(self) -> dict:
-        return {
-            "appointmentId": self.appointment_id,
-            "medicId": self.medic_id,
-            "patientId": self.medic_id,
-            "status": self.status.value
-        }

@@ -49,7 +49,7 @@ def appointment_get(appointment_id):
     appointment = _appointment_repository.get_appointment(appointment_id)
     if not appointment:
         return {"success": False, "cause": "Not found"}, 404
-    return {"success": True, "appointment": appointment.json_dict()}
+    return {"success": True, "appointment": appointment_to_json(appointment)}
 
 
 @appointment_blueprint.route("/appointment/all", methods=["GET"])
@@ -64,7 +64,7 @@ def appointment_all():
     except ValueError:
         return {"success": False, "cause": "Bad request"}
     appointments = _appointment_repository.get_appointments(medic_id=medic_id, patient_id=patient_id)
-    appointments = [a.json_dict() for a in appointments]
+    appointments = [appointment_to_json(a) for a in appointments]
     return {"success": True, "appointments": appointments}
 
 
@@ -78,3 +78,12 @@ def appointment_set_status(appointment_id):
         return {"success": False, "cause": "Not found"}, 404
     _appointment_repository.set_appointment_status(appointment_id, status)
     return {"success": True}
+
+
+def appointment_to_json(appointment: Appointment) -> dict:
+    return {
+        "appointmentId": appointment.appointment_id,
+        "medicId": appointment.medic_id,
+        "patientId": appointment.patient_id,
+        "status": appointment.status.value
+    }
