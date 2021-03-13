@@ -1,3 +1,4 @@
+from datetime import timezone
 from typing import Optional
 
 from injector import inject
@@ -59,5 +60,5 @@ class SessionDbRepositoryImpl(SessionRepository):
         return Session(
             row["user_id"],
             row["token"],
-            row["expire"]
+            row["expire"].replace(tzinfo=timezone.utc)
         )

@@ -1,3 +1,5 @@
+from datetime import date
+
 from flask import Blueprint, request
 from marshmallow import ValidationError
 
@@ -22,12 +24,31 @@ def appointment_create():
         return {"success": False, "cause": "Bad request"}, 400
     medic_id = values["medicId"]
     patient_id = values["patientId"]
+    time = values["time"]
     if not _user_repository.is_user_of_type(medic_id, UserType.MEDIC):
         return {"success": False, "cause": "Invalid medic"}, 400
     if not _user_repository.is_user_of_type(patient_id, UserType.PATIENT):
         return {"success": False, "cause": "Invalid patient"}, 400
-    _appointment_repository.add_appointment(Appointment(0, medic_id, patient_id, AppointmentStatus.PENDING))
+    if not _appointment_repository.is_available_time(medic_id, time):
+        return {"success": False, "cause": f"Not available time: {time.isoformat()}"}
+    _appointment_repository.add_appointment(Appointment(0, medic_id, patient_id, AppointmentStatus.PENDING, time))
     return {"success": True}
+
+
+@appointment_blueprint.route("/appointment/available_times", methods=["GET"])
+def appointment_available_times():
+    medic_id = request.args.get("medic_id")
+    d = request.args.get("date")
+    try:
+        medic_id = int(medic_id)
+        d = date.fromisoformat(d)
+    except ValueError or TypeError:
+        return {"Success": False, "cause": "Bad request"}
+    if not _user_repository.is_user_of_type(medic_id, UserType.MEDIC):
+        return {"Success": False, "cause": "Invalid medic"}
+    available_times = _appointment_repository.get_available_times(medic_id, d)
+    available_times = [at.isoformat() for at in available_times]
+    return {"success": True, "available_times": available_times}
 
 
 @appointment_blueprint.route("/appointment/<appointment_id>", methods=["DELETE"])
@@ -85,5 +106,6 @@ def appointment_to_json(appointment: Appointment) -> dict:
         "appointmentId": appointment.appointment_id,
         "medicId": appointment.medic_id,
         "patientId": appointment.patient_id,
-        "status": appointment.status.value
+        "status": appointment.status.value,
+        "time": appointment.time.isoformat()
     }

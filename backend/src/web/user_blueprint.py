@@ -42,7 +42,7 @@ def user_all():
 def user_create():
     try:
         values = USER_CREATE_SCHEMA.loads(request.data)
-    except ValidationError or JSONDecodeError as e:
+    except ValidationError or JSONDecodeError:
         return {"success": False, "cause": "Bad request"}, 400
     password = values["password"]
     user = json_to_user(values)

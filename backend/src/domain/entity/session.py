@@ -19,10 +19,12 @@ class Session:
     def __init__(self, user_id: int, token: str = None, expire: datetime = None):
         self.user_id = user_id
         self.token = token if token is not None else _gen_token()
-        self.expire = expire if expire is not None else datetime.now(timezone.utc) + _EXPIRE_TIME
-        # Converts unaware datetime to UTC datetime if necessary
-        if self.expire.tzinfo is None:
-            self.expire = self.expire.astimezone(timezone.utc)
+        if expire is None:
+            self.expire = datetime.now(timezone.utc) + _EXPIRE_TIME
+        elif expire.tzinfo != timezone.utc:
+            self.expire = expire.astimezone(timezone.utc)
+        else:
+            self.expire = expire
 
     def expired(self) -> bool:
         print(self.expire)
