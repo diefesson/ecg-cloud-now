@@ -30,7 +30,7 @@ def appointment_create():
     if not _user_repository.is_user_of_type(patient_id, UserType.PATIENT):
         return {"success": False, "cause": "Invalid patient"}, 400
     if not _appointment_repository.is_available_time(medic_id, time):
-        return {"success": False, "cause": f"Not available time: {time.isoformat()}"}
+        return {"success": False, "cause": f"Not available time: {time.isoformat()}"}, 400
     _appointment_repository.add_appointment(Appointment(0, medic_id, patient_id, AppointmentStatus.PENDING, time))
     return {"success": True}
 
@@ -43,9 +43,9 @@ def appointment_available_times():
         medic_id = int(medic_id)
         d = date.fromisoformat(d)
     except ValueError or TypeError:
-        return {"Success": False, "cause": "Bad request"}
+        return {"Success": False, "cause": "Bad request"}, 400
     if not _user_repository.is_user_of_type(medic_id, UserType.MEDIC):
-        return {"Success": False, "cause": "Invalid medic"}
+        return {"Success": False, "cause": "Invalid medic"}, 400
     available_times = _appointment_repository.get_available_times(medic_id, d)
     available_times = [at.isoformat() for at in available_times]
     return {"success": True, "available_times": available_times}
@@ -83,7 +83,7 @@ def appointment_all():
         if patient_id is not None:
             patient_id = int(patient_id)
     except ValueError:
-        return {"success": False, "cause": "Bad request"}
+        return {"success": False, "cause": "Bad request"}, 400
     appointments = _appointment_repository.get_appointments(medic_id=medic_id, patient_id=patient_id)
     appointments = [appointment_to_json(a) for a in appointments]
     return {"success": True, "appointments": appointments}
