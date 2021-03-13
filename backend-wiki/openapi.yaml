@@ -102,6 +102,8 @@ components:
           type: integer
         status:
           $ref: "#/components/schemas/appointmentStatus"
+        time:
+          $ref: "#/components/schemas/isoDatetime"
 paths:
   /sample/{sample_id}:
     get:
@@ -376,7 +378,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/appointment"
+              type: object
+              properties:
+                medicId:
+                  type: integer
+                patientId:
+                  type: integer
+                time:
+                  $ref: "#/components/schemas/isoDatetime"
       responses:
         200:
           description: "OK"
@@ -466,6 +475,41 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/appointment"
+        400:
+          description: "Bad request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/failResponse"
+  /appointment/available_times:
+    get:
+      summary: "List medic available times"
+      tags: [appointment]
+      parameters:
+        - name: medic_id
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: date
+          in: query
+          required: true
+          schema:
+            type: string
+            description: "ISO encoded date"
+            example: "2021-03-18"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                allOf: [$ref: "#/components/schemas/response"]
+                properties:
+                  available_times:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/isoDatetime"
         400:
           description: "Bad request"
           content:
