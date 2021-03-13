@@ -12,14 +12,27 @@ components:
       name: "SESSION_TOKEN"
       in: cookie
   schemas:
+    response:
+      type: object
+      required: [success]
+      properties:
+        success:
+          type: boolean
     userType:
       type: integer
       enum: [0, 1]
       description: "0 for patient, 1 for medic"
+    idDoc:
+      type: string
+      description: "Represents a RG or CRM"
     appointmentStatus:
       type: integer
       enum: [0, 1]
       description: "0 for pending, 1 for done"
+    isoDatetime:
+      type: string
+      description: "ISO encoded timestamp with delta timezone"
+      example: "2021-03-18-14:30+00:00"
     failResponse:
       type: object
       properties:
@@ -29,6 +42,7 @@ components:
           example: false
         cause:
           type: string
+          example: "Fail cause"
     sample:
       type: object
       properties:
@@ -40,6 +54,8 @@ components:
           type: integer
         raw:
           type: string
+          description: "Base 64 encoded 1 byte precision samples"
+          example: "bnYybjNyZnEzbmlmM2luaTMgZmkzaDRmajNmNA=="
     user:
       type: object
       properties:
@@ -56,8 +72,7 @@ components:
         type:
           $ref: "#/components/schemas/userType"
         idDoc:
-          type: string
-          description: "RG for patients, CRM for medics"
+          $ref: "#/components/schemas/idDoc"
         state:
           type: string
           example: "CE"
@@ -76,9 +91,7 @@ components:
         userId:
           type: integer
         expire:
-          type: string
-          description: "ISO formated timestamp"
-          example: "2021-03-18-14:30:00Z"
+          $ref: "#/components/schemas/isoDatetime"
     appointment:
       properties:
         appointmentId:
@@ -87,7 +100,7 @@ components:
           type: integer
         patientId:
           type: integer
-        status: 
+        status:
           $ref: "#/components/schemas/appointmentStatus"
 paths:
   /sample/{sample_id}:
@@ -107,7 +120,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                allOf: [$ref: "#/components/schemas/response"]
                 properties:
                   success:
                     type: boolean
@@ -142,10 +155,8 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                allOf: [$ref: "#/components/schemas/response"]
                 properties:
-                  success:
-                    type: boolean
                   samples:
                     type: array
                     items:
@@ -154,7 +165,7 @@ paths:
           description: "Bad request"
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/failResponse"
   /user/{user_id}/:
     get:
@@ -173,10 +184,8 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                allOf: [$ref: "#/components/schemas/response"]
                 properties:
-                  success:
-                    type: boolean
                   user:
                     $ref: "#/components/schemas/user"
         400:
@@ -208,10 +217,8 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                allOf: [$ref: "#/components/schemas/response"]
                 properties:
-                  success:
-                    type: boolean
                   users:
                     type: array
                     items:
@@ -234,17 +241,13 @@ paths:
               properties:
                 password:
                   type: string
-                
       responses:
         200:
           description: "OK"
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
+                allOf: [$ref: "#/components/schemas/response"]
         400:
           description: "Bad request"
           content:
@@ -278,10 +281,8 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                allOf: [$ref: "#/components/schemas/response"]
                 properties:
-                  success:
-                    type: boolean
                   exists:
                     type: boolean
         400:
@@ -310,10 +311,8 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                allOf: [$ref: "#/components/schemas/response"]
                 properties:
-                  success:
-                    type: boolean
                   session:
                     $ref: "#/components/schemas/session"
         400:
@@ -326,7 +325,7 @@ paths:
           description: "Invalid username or passsword"
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/failResponse"
     get:
       summary: "Gets the current session data"
@@ -362,15 +361,12 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
+                allOf: [$ref: "#/components/schemas/response"]
         403:
           description: "Invalid session"
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/failResponse"
   /appointment:
     post:
@@ -387,10 +383,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
+                allOf: [$ref: "#/components/schemas/response"]
         400:
           description: "Bad request, invalid patient or medic"
           content:
@@ -401,22 +394,19 @@ paths:
     delete:
       summary: "Deletes a appointment"
       tags: [appointment]
-      parameters: 
+      parameters:
         - name: appointment_id
           in: path
           required: true
           schema:
             type: integer
       responses:
-        200: 
+        200:
           description: "OK"
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
+                allOf: [$ref: "#/components/schemas/response"]
         400:
           description: "Bad request"
           content:
@@ -426,36 +416,34 @@ paths:
     get:
       summary: "Deletes a appointment"
       tags: [appointment]
-      parameters: 
+      parameters:
         - name: appointment_id
           in: path
           required: true
           schema:
             type: integer
       responses:
-        200: 
+        200:
           description: "OK"
           content:
             application/json:
               schema:
-                type: object
+                allOf: [$ref: "#/components/schemas/response"]
                 properties:
-                  success:
-                    type: boolean
-                  appointment: 
+                  appointment:
                     $ref: "#/components/schemas/appointment"
         400:
           description: "Bad request"
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/failResponse"
   /appointment/all:
     get:
       summary: "List all appoinments"
       description: "Can also filter by patient and medic"
       tags: [appointment]
-      parameters: 
+      parameters:
         - name: medic_id
           in: query
           required: false
@@ -472,19 +460,15 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/appointment"
+                allOf: [$ref: "#/components/schemas/response"]
+                properties:
+                  appointments:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/appointment"
         400:
           description: "Bad request"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/failResponse"
-      
-      
-      
-      
-      
-      
-      
