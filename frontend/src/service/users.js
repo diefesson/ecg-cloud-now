@@ -8,11 +8,12 @@ SuperTokensRequest.init({
     withCredentials: true
 });
 
-const findById = async (user_id) => {
-    const response = await api.get("http://localhost:8092/user/" + user_id).
+const findById = async (id) => {
+    const response = await api.get(process.env.REACT_APP_ENDPOINT_USER_BY_ID + id).
 then().catch();
 
 localStorage.setItem('username', response.data.user.username)
+localStorage.setItem('id', response.data.user.userId)
 localStorage.setItem('session', true)
 
  const type = response.data.user.type;
@@ -51,5 +52,13 @@ export default {
 
     redirect: () => {
        componentDidMount();
+    },
+
+    hasUser: (username,email) => {
+        return api.get(process.env.REACT_APP_ENDPOINT_HAS_USER + username + '/' + email);
+    },
+
+    byId: (id) => {
+        return api.get(process.env.REACT_APP_ENDPOINT_USER_BY_ID + id)
     }
 }

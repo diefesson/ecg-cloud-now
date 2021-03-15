@@ -1,23 +1,24 @@
 import api from './api'
-// import SuperTokensRequest from 'supertokens-website';
-
-// SuperTokensRequest.addAxiosInterceptors(api);
-
-// SuperTokensRequest.init({
-//     apiDomain: process.env.REACT_APP_BACKEND_ADRESS,
-//     withCredentials: true
-// });
 
 export default {
     list: () => {
         return api.get(process.env.REACT_APP_ENDPOINT_LIST_APPOINTMENTS);
     },
-
-    save: (appointment) => {
-        return api.post(process.env.REACT_APP_ENDPOINT_CREATE_APPOINTMENT, appointment);
+    
+    listByTime: (id, date) => {
+        return api.get(process.env.REACT_APP_ENDPOINT_LIST_TIMES_APPOINTMENTS + id +"&date=" + date);
     },
 
-    delete: (user_id) => {
-        return api.get(process.env.REACT_APP_ENDPOINT_DELETE_APPOINTMENT + user_id);
+    byId: (id) => {
+        return api.get(process.env.REACT_APP_ENDPOINT_BY_ID_APPOINTMENT + id);
+    },
+
+    save: (medicId,patientId, time) => {
+        return api.post(process.env.REACT_APP_ENDPOINT_CREATE_APPOINTMENT, {medicId, patientId, time}).
+        then().catch();
+    },
+
+    delete: (id) => {
+        return api.delete(process.env.REACT_APP_ENDPOINT_DELETE_APPOINTMENT + id);
     },
 }

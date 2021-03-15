@@ -1,9 +1,7 @@
 import React from 'react'
 
-import './style.scss'
-
-import Menu from '../../Main/templates/Menu-Vertical/paciente/Menu-Vertical'
-import Consulta from '../../Main/templates/Info-consulta/index'
+import Menu from '../../Main/templates/Menu-Vertical/medico/menu-Vertical'
+import Consulta from '../../Main/templates/Info-consulta/medico/index'
 import Logout from '../../Main/templates/Logout/index'
 import BadRequest from '../../Main/templates/Redirect/index'
 
@@ -12,7 +10,7 @@ import BadRequest from '../../Main/templates/Redirect/index'
 export default props => {
     const session = localStorage.getItem('session')
     const type = localStorage.getItem("type")
-    if (session === "true" && type === '0') {
+    if (session === "true" && type === '1') {
         return (
             <div className='flex'>
                 <Menu />
@@ -30,7 +28,7 @@ export default props => {
             </div>
         )
     }
-    if(session != "true" || type === '1'){
+    if(session != "true" || type === '0'){
         return (
             <BadRequest/>
         )

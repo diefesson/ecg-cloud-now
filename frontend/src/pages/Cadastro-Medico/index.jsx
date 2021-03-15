@@ -4,6 +4,7 @@ import {
 } from "react-router-dom";
 
 import api from '../../service/api'
+import User from '../../service/users'
 
 
 class index extends Component {
@@ -65,14 +66,18 @@ class index extends Component {
             )
     }
 
-    equalsPass(pass, confirmPass) {
+    validation = async function(pass, confirmPass, username, email) {
+        const response = await User.hasUser(username, email);
         if (pass !== confirmPass) {
             alert("Senhas diferentes")
         }
         else if (pass === confirmPass && pass.length < 7) {
             alert("Sua senha deve ser maior que 6 caracteres")
         }
-        else if (pass === confirmPass && pass.length != 0) {
+        else if (pass === confirmPass && pass.length != 0 && response.data.exists === true) {
+            alert("Username ou email já cadastrados!!")
+        }
+        else if (pass === confirmPass && pass.length != 0 && response.data.exists === false) {
             this.handleAdd();
         }
     }
@@ -198,8 +203,9 @@ class index extends Component {
 
                                 <div className='input-form first-button'>
                                     <button className='custom-button-register'
-                                        onClick={e => this.equalsPass(this.state.password,
-                                            this.state.confirmPass)}
+                                        onClick={e => this.validation(this.state.password,
+                                            this.state.confirmPass, this.state.username,
+                                            this.state.email)}
                                     >Cadastrar</button>
                                 </div>
 

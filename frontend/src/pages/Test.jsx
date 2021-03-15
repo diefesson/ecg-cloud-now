@@ -2,43 +2,45 @@ import { Component } from 'react'
 
 import EcgChart from '../EcgChart'
 
-import Paciente from '../service/pacient'   
+import Consulta from '../service/consulta'
+import Medico from '../service/medico'
 
 class Test extends Component {
     state = {
-        pacientes: [],
+        consultas: [],
+        medico: ''
     }
 
     componentDidMount = async function () {
-        const response = await Paciente.list().then();
+        const response = await Consulta.list();
+        this.setState({ consultas: response.data.appointments });
+    }
 
-        this.setState({ pacientes: response.data });
+    componentDidMount(id) {
+        this.getName(id);
+      }
+
+    getName = async function (id) {
+        const response = await Medico.byId(id);
+        console.log(response.data.user.name)
     }
 
     render() {
-        const { pacientes } = this.state;
+        const { consultas } = this.state
         return (
             <div>
-                <h1>Dados da api de pacientes</h1>
-
-
-                {pacientes.map(paciente => (
-
-
-                    <ul key={paciente.paciente_id}>
-                        <h3>{paciente.name}</h3>
-                        <li className=''>{paciente.email}</li>
-                        <li className=''>{paciente.address}</li>
-                        <li className=''>{paciente.cep}</li>
-                    </ul>
+                {consultas.map(consulta => (
+                    <div>
+                        {/* {this.componentDidMount(consulta.medicId)} */}
+                    </div>
 
                 ))}
 
-                <h1>ECG do paciente 4</h1>
+                {/* <h1>ECG do paciente 4</h1>
 
                 <div className='dado-ecg'>
                     <EcgChart sampleId="18" className='dado'/>
-                </div>
+                </div> */}
 
 
             </div>

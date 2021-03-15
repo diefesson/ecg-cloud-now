@@ -1,4 +1,7 @@
 import React from 'react'
+import {
+    BrowserRouter as Router, Switch, Route, Link
+} from "react-router-dom";
 
 import '../Home-Paciente/home-page.scss'
 import Consulta from './assets/consulta.png'
@@ -10,7 +13,7 @@ import BadRequest from '../Main/templates/Redirect/index'
 export default props => {
     const session = localStorage.getItem('session')
     const type = localStorage.getItem("type")
-    if (session === "true" &&  type === '1') {
+    if (session === "true" && type === '1') {
         return (
             <div className='flex'>
                 <Menu />
@@ -26,7 +29,11 @@ export default props => {
                                 <strong>consultar com você</strong> </p></span>
 
                             <div className='conhecer-pacientes-faixa'>
-                                <a href=""><strong>CONHEÇA SEUS PACIENTES > </strong> </a>
+                                <Link className='reset-link-menu' to='minhas-consultas-medico'>
+                                    <div>
+                                        <a href=""><strong>CONHEÇA SEUS PACIENTES > </strong> </a>
+                                    </div>
+                                </Link>
                             </div>
                         </div>
                         <div className='img-faixa'>
@@ -49,9 +56,9 @@ accumsan. Fusce ullamcorper pharetra ipsum id congue.</p>
             </div>
         )
     }
-    if(session != "true" || type === '0'){
+    if (session != "true" || type === '0') {
         return (
-            <BadRequest/>
+            <BadRequest />
         )
     }
 }

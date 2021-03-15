@@ -1,7 +1,9 @@
 .borda-consulta{
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 0.5fr 0.5fr 0.5fr 1fr;
     justify-content: center;
+    align-items: center;
+    align-content: center;
     margin: 0;
     padding: 0;
     border-radius: 30px;
@@ -24,8 +26,16 @@
     border: none;
 }
 
+.button-submit-consulta{
+    display: flex;
+    justify-content: flex-end;
+    width: 80%;
+    height: 140px;
+}
+
 .button-submit-consulta button{
     background-color: #001C81;
+    opacity: 0.8;
     color: #ffff;
     border: none;
     margin: 0;
@@ -40,8 +50,28 @@
 
 .button-submit-consulta button:hover{
     cursor: pointer;
+    opacity: 1;
 }
 
 .button-submit-consulta button:focus{
     outline: none; 
+}
+
+.time-consulta input{
+    height: 35px;
+}
+
+.button-new-page Link{
+    background-color: #001C81;
+    opacity: 0.8;
+    color: #ffff;
+    border: none;
+    margin: 0;
+    font-size: 0.9rem;
+    padding: 13px;
+    width: 150px;
+    border-radius: 25px;
+    margin-right: -120px;
+    margin-top: 100px;
+    float: right;
 }

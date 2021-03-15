@@ -12,11 +12,15 @@ export default props => {
             <div className='card-minhas-consultas'>
                 <div className='disable-card'>
                     <div className='body-card'>
-                        <div>
-                            Consulta #1
-                    </div>
-                        <div>
-                            Dr. João Alves
+                        <div className='text-center'>
+                            Consulta #{props.consulta}
+                        </div>
+                        <div className='text-center'>
+                            {props.date}&emsp;
+                            {props.time}
+                        </div>
+                        <div className='text-center'>
+                            Dr(a) Adail Machado da Costa
                     </div>
                     </div>
                 </div>
