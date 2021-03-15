@@ -81,7 +81,7 @@ class AppointmentRepositoryImpl(AppointmentRepository):
         return [self.row_to_appointment(r) for r in rows]
 
     def get_scheduled_times(self, medic_id: int, d: date):
-        start = datetime(d.year, d.month, d.day, tzinfo=timezone.utc)
+        start = datetime(d.year, d.month, d.day, tzinfo=timezone.utc) + morning_start
         end = start + timedelta(hours=24)
         values = (medic_id, start, end)
         query = _select_time\
