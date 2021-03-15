@@ -1,0 +1,84 @@
+$color-background: #437F8C;
+$font-main: 'News Cycle', sans-serif;
+$secont-color: #ffff;
+
+
+body{
+    margin: 0;
+    background-color: $color-background;
+    font-family: $font-main;
+    font-size: 1.4rem;
+    color: $secont-color;
+}
+
+.division-page{
+    margin-top: 200px;
+}
+
+.division-page-other-color{
+    height: 300px;
+    background-color: $secont-color;
+}
+
+.image-center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.line {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.esp-left{
+    margin-left: 7%;
+}
+
+.col-100 {
+    width: 100%;
+}
+
+.col-70 {
+    width: 70%;
+}
+
+.col-50 {
+    width: 50%;
+}
+
+.col-33 {
+    width: 33%;
+}
+
+.col-30 {
+    width: 30%;
+}
+
+.col-20 {
+    width: 20%;
+}
+
+span {
+    display: block;
+}
+
+.dado-ecg{
+    background-color: $secont-color;
+}
+
+.flex{
+    display: flex;
+}
+
+.esp-logout{
+    margin-bottom: 50px;
+}
+
+.logout-esp-default{
+    margin-left: -80px;
+}

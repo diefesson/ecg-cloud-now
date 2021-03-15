@@ -1,0 +1,148 @@
+$color-background: #437F8C;
+
+
+.img-home img{
+    width: 550px;
+}
+
+.img-about img{
+    height: 300px;
+}
+
+.first-page{
+    margin-top: 50px;
+}
+
+.custom-button{
+    font-size: 1.3vw;
+    padding: 15px 8px;
+    width: 510px;
+    margin-top: 3%;
+    background-color: $color-background;
+    color: #ffff;
+    border:1px solid #F3FFFF;
+    display: flex;
+    text-decoration: none;
+}
+
+.custom-button:hover{
+    cursor: pointer;
+}
+
+.text{
+    margin-top: -7%;
+}
+
+.custom-font{
+    font-size: 4.5vw;
+    margin-bottom: 30px;
+}
+
+.new-colors{
+    background-color: #ffff;
+    color: #5E5E5E;
+}
+
+ #custom-height-faixa{
+     width: 100%;
+    z-index: -1000;
+    margin-top: -100px;
+    height: 100px;
+    background-color: #ffff;
+}
+
+.team{
+    background-color: #F3F3F3;
+    height: 100vh;
+    margin-top: -100px;
+}
+
+#font-color{
+    color: $color-background;
+}
+
+.marciel{
+    // background-color: burlywood;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: flex;
+}
+
+.felipe{
+    display: flex;
+}
+
+.diefesson{
+    display: flex;
+}
+
+.luis{
+    display: flex;
+}
+
+.victor{
+    display: flex;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 22vh 22vh 22vh;
+    grid-row-gap: 10%;
+    justify-items: center;
+    align-items: center;
+}
+
+.photo{
+    align-items: center;
+    justify-items: center;
+}
+.photo img{
+    width: 150px;
+}
+
+.first-text-teams{
+    padding: 0px 0px 0px 20px;
+    color: black;
+}
+
+.second-text-teams{
+    font-size: 0.8rem;
+    margin-top: 0;
+    padding: 0px 0px 0px 20px;
+    color: $color-background;
+}
+
+.redes-sociais ul {
+    display: flex;
+    padding: 10px 0px 0px 20px;
+  }
+  
+  .redes-sociais ul li {
+    list-style: none;
+    margin-top: -50px;
+  }
+  
+  .redes-sociais ul li a {
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 0px 10px 0px 0px;
+    transition: all 250ms linear 0s;
+  }
+
+  .redes-sociais ul li a img{
+   width: 30px;
+  }
+
+  .text-photo{
+      width: 180px;
+  }
+
+  .route-value{
+      margin: auto;
+  }
+
+  .route-value span{
+  }

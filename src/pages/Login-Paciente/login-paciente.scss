@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+$corPadrao: #437F8C;
+
+.conteudo {
+    height: 100%;
+    margin: 0 auto;
+    background-image: url("./Fundo.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:right;
+    background-attachment:fixed;
+    position:fixed;
+    top: 0%;
+    left: 0%;
+    width: 1540px;
+    height: 1024;
+}
+
+.container1 {
+    position: relative;
+    width: 1120px;
+    height: 600px;
+    top: 60px;
+    
+    @media screen and (min-width: 0px){
+        left: 0px;
+    }
+
+    @media screen and (min-width: 1160px) {
+        left: 30px;
+    }
+
+    @media screen and (min-width: 1210px) {
+        left: 120px;
+    }
+
+    @media screen and (min-width: 1410px) {
+        left: 210px;
+    }
+
+    @media screen and (min-height: 0px) {
+        top: 0px;
+    }
+
+    @media screen and (min-height: 630px) {
+        top: 30px;
+    }
+
+    @media screen and (min-height: 680px) {
+        top: 60px;
+    }
+
+    background: #FFFFFF;
+    box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.25);
+
+    img {
+        position: absolute;
+        width: 490px;
+        height: 490px;
+        left: 600px;
+        top: 50px;
+    }
+
+    .container2 {
+        position: absolute;
+        width: 558px;
+        height: 600px;
+    
+        background: $corPadrao;
+    
+        color: white;
+    
+        .titulo {
+            h1 {
+                position: absolute;
+                font-weight: 500;
+                font-family: 'Roboto', sans-serif;
+                color: white;
+                text-align: center;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 40px;
+                line-height: 266px;
+                left: 170px;
+                top: -80px;
+            }
+        }
+    
+        .login {
+            .login-email {
+                display: flex;
+                position: absolute;
+                width: 410px;
+                height: 60px;
+                left: 76px;
+                top: 140px;
+                background-color: #FFFFFF;
+                border-radius: 70px;
+    
+                input {
+                    background: transparent;
+                    width: 94%;
+                    outline-width: 0;
+                    color: black;
+                    border: none;
+                    font-size: 22px;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                    margin-top: 0px;
+                    text-align: center;
+                }
+    
+                ::placeholder {
+                    position: relative;
+                    text-align: center;
+                    color: #3b3b3b;
+                    font-family: 'Roboto', sans-serif;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 22px;
+                    line-height: 33px;
+                }
+            }
+    
+            .login-senha {
+                display: flex;
+                position: absolute;
+                width: 410px;
+                height: 60px;
+                left: 76px;
+                top: 240px;
+                background-color: #FFFFFF;
+                border-radius: 70px;
+    
+                input {
+                    background: transparent;
+                    width: 94%;
+                    outline-width: 0;
+                    color: black;
+                    border: none;
+                    font-size: 22px;
+                    font-weight: 900;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                    margin-top: 0px;
+                    text-align: center;
+                }
+    
+                ::placeholder {
+                    position: relative;
+                    text-align: center;
+                    color: #3b3b3b;
+                    font-family: 'Roboto', sans-serif;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 22px;
+                    line-height: 33px;
+                }
+            }
+        }
+    
+        .botao-entrar {
+            button {
+                border: none;
+                position: absolute;
+                width: 410px;
+                height: 60px;
+                left: 76px;
+                top: 348px;
+                background: #E15E70;
+                border-radius: 70px;
+            
+                font-family: 'Roboto', sans-serif;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 22px;
+                line-height: 42px;
+            
+                color: white;
+                outline-width: 0;
+            }
+    
+            button:hover {
+                background-color: #e22229;
+                cursor: pointer;
+            }
+        }
+        
+        .login-ajuda {
+            position: absolute;
+            top: 304px;
+            left: 25px;
+        
+            ul {
+                display: flex;
+                list-style: none;
+        
+                li {
+                    font-family: 'Roboto', sans-serif;
+                    font-family: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    color: black;
+                    
+                    width: 132px;
+                    padding: 0px 50px;
+                }
+            }
+        
+            .botao-selecionar {
+                button {
+                    border: none;
+                    position: absolute;
+                    width: 24px;
+                    height: 24px;
+                    left: 60px;
+                    top: 19px;
+                
+                    background: $corPadrao;
+                    border: 3px solid #000000;
+                    box-sizing: border-box;
+                    outline-width: 0;
+                }
+
+                button:hover {
+                    background-color: white;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .cadastro {
+            h4 {
+                position: relative;
+                left: 240px;
+                top: 400px;
+                font-family: 'Roboto', sans-serif;
+                font-family: normal;
+                font-weight: 700;
+                color: black;
+                font-size: 16px;
+                    
+                width: 132px;
+            }
+
+            button {
+                border: none;
+                position: absolute;
+                width: 410px;
+                height: 60px;
+                left: 76px;
+                top: 450px;
+                background: #292d96;
+                border-radius: 70px;
+            
+                font-family: 'Roboto', sans-serif;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 22px;
+                line-height: 42px;
+            
+                color: white;
+                outline-width: 0;
+            }
+
+            button:hover {
+                background-color: #1c1f66;
+                cursor: pointer;
+            }
+        }
+    }    
+}
