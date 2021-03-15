@@ -96,9 +96,10 @@ class AppointmentRepositoryImpl(AppointmentRepository):
         return [r["time"].replace(tzinfo=timezone.utc) for r in rows]
 
     def get_available_times(self, medic_id: int, d: date) -> list[datetime]:
+        now = datetime.now(timezone.utc)
         wts = self.generate_work_times(d)
         scheduled_times = self.get_scheduled_times(medic_id, d)
-        return [t for t in wts if t not in scheduled_times]
+        return [t for t in wts if t > now and t not in scheduled_times]
 
     def is_available_time(self, medic_id: int, time: datetime) -> bool:
         return time in self.get_available_times(medic_id, time.date())
