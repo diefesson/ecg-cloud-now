@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './login-paciente.scss';
+import './login.scss';
 import imgPaciente from './44305.png';
 
 import {

@@ -26,14 +26,16 @@
 }
 
 .faixa-home-paciente{
+    margin-top: 50px;
     display: grid;
     grid-template-columns: 2.5fr 1fr;
     background-color: #ffff;
     border-radius: 25px;
     margin: auto;
-    width: 85%;
+    width: 90%;
     height: 120px;
     color: black;
+
 }
 
 .texto-faixa-paciente{
@@ -60,6 +62,17 @@
     text-decoration: none;
 }
 
+.conhecer-pacientesmed-faixa{
+    margin-top: 10px;
+    margin-left: 80px;
+}
+
+.conhecer-pacientesmed-faixa a{
+    font-size: 1rem;
+    color: #001C81;
+    text-decoration: none;
+}
+
 .img-faixa img{
     margin-top: -40px;
 }
@@ -75,4 +88,323 @@
 
 .sobre-home p{
     width: 90%;
+}
+
+
+#menu-toggle {
+    position: absolute;
+    opacity: 0;
+}
+
+@media screen and (max-width: 1160px) {
+    .sobre-home h1 {
+        font-size: 95%;
+    }
+
+    .sobre-home p {
+        font-size: 95%;
+    }
+}
+
+
+@media screen and (max-width: 1050px) {
+    .sobre-home p {
+        font-size: 90%;
+    }
+}
+
+@media screen and (max-width: 974px) {
+    .sobre-home {
+        margin-left: 50px;
+    }
+
+    .menu-section {
+        display: flex;
+        .hamburguer {
+            width: 50px;
+            label {
+              cursor: pointer;
+              position: relative;
+              display: block;
+              width: 40px;
+              margin-left: 20%;
+              margin-top: 40px;
+            }
+            
+            label span {
+              position: absolute;
+              display: block;
+              height: 6px;
+              width: 100%;
+              border-radius: 30px;
+              background: white;
+              transition: 0.3s ease-in-out;
+            }
+      
+            label span:nth-child(1) {
+              top: 0px;
+            }
+      
+            label span:nth-child(2) {
+              top: 14px;
+            }
+      
+            label span:nth-child(3) {
+                
+              top: 28px;
+            }
+      
+            label span:nth-child(4) {
+              opacity: 0;
+            }
+          }   
+        } 
+        
+      #menu-toggle:checked + .hamburguer label span:nth-child(1) {
+        background: black;
+        transform: rotate(-45deg);
+        top: 12px;
+        z-index: 100;
+      }
+  
+      #menu-toggle:checked + .hamburguer label span:nth-child(2) {
+        opacity: 0;
+      }
+  
+      #menu-toggle:checked + .hamburguer label span:nth-child(3) {
+        background: black;
+        transform: rotate(45deg);
+        top: 12px;
+        z-index: 100;
+      } 
+      
+      #menu-toggle:checked + .hamburguer .menu-nav {
+          .menu-vertical {
+              transition-duration: 1s;
+              display: block;
+
+              .logo-menu-vertical {
+                  display: none;
+              }
+
+              ul {
+                margin-top: -40px;
+                height: 100vh;
+                filter: drop-shadow(10px 0px 2px rgba(0, 0, 0, 0.1));
+
+                li {
+                    top: 120px;
+                }
+              }
+          }
+          .reset-link-menu {
+              
+          }
+      }
+}
+
+@media screen and (max-width: 800px) {
+    .sobre-home p {
+        font-size: 80%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .sobre-home {
+        font-size: 79%;
+        margin-left: 40px;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .alinhamento-textos-faixa {
+        margin-left: -60px;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .faixa-home-paciente {
+        height: 100px;
+    }
+
+    .img-faixa {
+        margin-top: -2px;
+        img {
+            width: 190px;
+            height: 150px;
+        }
+    }
+
+    .img-faixa-paciente {
+        margin-top: 37px;
+        margin-left: 0px;
+        img {
+            width: 210px;
+            height: 130px;
+        }
+    }
+
+    .texto-faixa-paciente {
+        margin-top: -3px;
+        font-size: 85%;
+    }
+
+    .conhecer-pacientes-faixa {
+        strong {
+            font-size: 90%;
+        }
+    }
+
+    .conhecer-pacientes-faixa {
+        margin-top: 2px;
+    }
+
+    .conhecer-pacientesmed-faixa {
+        margin-top: -10px;
+        strong {
+            font-size: 90%;
+        }
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .sobre-home p {
+        font-size: 70%;
+    }
+
+    .conhecer-pacientes-faixa {
+        margin-top: -4px;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .faixa-home-paciente {
+        height: 78px;
+    }
+
+    .img-faixa-paciente {
+        margin-top: 39px;
+        margin-left: 0px;
+        img {
+            width: 160px;
+            height: 103px;
+        }
+    }
+
+    .texto-faixa-paciente {
+        margin-top: -9px;
+        font-size: 65%;
+    }
+
+    .conhecer-pacientes-faixa {
+        strong {
+            font-size: 70%;
+        }
+    }
+    
+    .img-faixa {
+        margin-top: 6px;
+        img {
+            width: 150px;
+            height: 120px;
+        }
+    }
+
+    .conhecer-pacientesmed-faixa {
+        margin-top: -14px;
+        strong {
+            font-size: 70%;
+        }
+    }
+}
+
+@media screen and (max-width: 414px) {
+    .sobre-home p {
+        font-size: 60%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .img-faixa {
+        margin-top: 24px;
+        img {
+            width: 126px;
+            height: 100px;
+        }
+    }
+
+    .sobre-home {
+        margin-left: 20px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .faixa-home-paciente {
+        height: 70px;
+    }
+
+    .img-faixa-paciente {
+        margin-top: 44px;
+        margin-left: 0px;
+        img {
+            width: 140px;
+            height: 90px;
+        }
+    }
+
+    .texto-faixa-paciente {
+        margin-top: -10px;
+    }
+}
+
+@media screen and (max-width: 364px) {
+    .faixa-home-paciente {
+        height: 60px;
+        border-radius: 10px;
+    }
+
+    .img-faixa-paciente {
+        margin-top: 38px;
+        img {
+            width: 120px;
+            height: 75px;
+        }
+    }
+
+    .conhecer-pacientes-faixa {
+        margin-top: -12px;
+        margin-left: 70px;
+
+        strong {
+            font-size: 60%;
+        }
+    }
+
+    .texto-faixa-paciente {
+        margin-left: 70px;
+        font-size: 50%;
+    }
+
+    .conhecer-pacientesmed-faixa {
+        margin-top: -23px;
+        margin-left: 70px;
+
+        strong {
+            font-size: 60%;
+        }
+    }
+
+    .img-faixa {
+        margin-top: 30px;
+        img {
+            width: 90px;
+            height: 75px;
+        }
+    }
+}
+
+@media screen and (max-height: 800px) {
+    .faixa-home-paciente {
+        margin-top: 50px;
+    }
 }

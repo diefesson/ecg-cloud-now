@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import {
+    BrowserRouter as Router, Switch, Route, Link
+} from "react-router-dom";
+
 import Patient from '../../../../service/users'
 
 import './style.scss'
@@ -37,7 +41,7 @@ class index extends Component {
                     </div>
                         <div className='input-send-diagnostico'>
                             <textarea name="" placeholder='Digite suas conclusões baseadas no eletrocardiograma...'
-                                required cols="30" rows="10"></textarea>
+                                cols="30" rows="10"></textarea>
                         </div>
                     </div>
                     <div>
@@ -45,26 +49,28 @@ class index extends Component {
                             Receita
                     </div>
                         <div className='input-send-diagnostico'>
-                            <textarea required name="" placeholder='Digite os medicamentos a serem tomados...'
+                            <textarea name="" placeholder='Digite os medicamentos a serem tomados...'
                                 cols="30" rows="10"></textarea>
                         </div>
                     </div>
                     <div className='inputs-diagnosticos'>
                         <div>
-                            <input required type="text" placeholder="Glicemia..." />
+                            <input type="text" placeholder="Glicemia..." />
                         </div>
                         <div>
-                            <input required type="text" placeholder="Pressão Arterial..." />
+                            <input type="text" placeholder="Pressão Arterial..." />
                         </div>
                         <div>
-                            <input required type="text" placeholder="Temp Corporal..." />
+                            <input type="text" placeholder="Temp Corporal..." />
                         </div>
                     </div>
                     <div className='upload-ecg'>
-                        <input required type="file" />
+                        <input type="file" />
                     </div>
-                    <div className='input-submit-diagnostico'>
-                        <input type="submit" value="Enviar" />
+                    <div className=''>
+                        <Link className='reset-link-menu input-submit-diagnostico' to='diagnostico'>
+                            Enviar
+                    </Link>
                     </div>
                 </form>
             </div>

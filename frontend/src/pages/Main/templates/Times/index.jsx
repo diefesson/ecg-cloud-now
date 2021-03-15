@@ -24,19 +24,24 @@ class index extends Component {
         this.setState({ times: response.data.available_times });
     }
 
-    setTimes = function(hours, minutes) {
-        this.setState({ hours: hours});
-        this.setState({ minutes: minutes});
+    setTimes = function (hours, minutes) {
+        this.setState({ hours: hours });
+        this.setState({ minutes: minutes });
     }
 
-    create(){
+    create() {
         const patientId = localStorage.getItem('id');
         const medicId = localStorage.getItem('medicId');
         const time = localStorage.getItem('date') + 'T' + this.state.hours + ':' + this.state.minutes +
-        "+00:00";
+            "+00:00";
+        if (this.state.hours !== 0) {
+            alert("Consulta criada com sucesso!!")
+            Consulta.save(medicId, patientId, time)
+        }
+        else if (this.state.hours === 0) {
+            alert("Consulta NÃO criada pois o horário não foi marcado!!")
+        }
 
-        alert("Consulta criada com sucesso!!")
-        Consulta.save(medicId, patientId, time)
     }
 
     render() {
@@ -50,8 +55,8 @@ class index extends Component {
                         const minutes = newDate.getMinutes()
                         return (
                             <div className='button-times-click'>
-                                <input type="button" value={hours + ":" + 
-                                minutes} name='time' onClick={() => this.setTimes(hours, minutes)} />
+                                <input type="button" value={newDate.getHours() + ":" +
+                                    minutes} name='time' onClick={() => this.setTimes(hours, minutes)} />
                             </div>
                         )
                     })}
@@ -59,7 +64,7 @@ class index extends Component {
                 <div className='submit-times'>
                     <hr />
                     <Link className='reset-link-menu input-submite' to='home-paciente'
-                    onClick={() => this.create()}>
+                        onClick={() => this.create()}>
                         <h4>AGENDAR CONSULTA</h4>
                     </Link>
                 </div>

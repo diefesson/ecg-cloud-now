@@ -12,8 +12,8 @@ import imgFelipe from '../assets/imgFelipe.png'
 import imgDiefesson from '../assets/imgDiefesson.png'
 import imgLuis from '../assets/imgLuis.png'
 import imgVictor from '../assets/imgVictor.png'
-import instagram from '../assets/Instagram.png'
-import facebook from '../assets/Facebook.png'
+import github from '../assets/github.png'
+import linkedin from '../assets/linkedin.png'
 
 import './Home.scss'
 import '../../../Style.scss'
@@ -42,7 +42,7 @@ export default props => {
                        seja você um médico ou um paciente.</p>
                             </div>
                             <div className='line'>
-                                <Link className='custom-button' type="button" to='login-paciente' >
+                                <Link className='custom-button' type="button" to='login' >
                                     <span className='route-value'>Acessar Plataforma</span>
                                 </Link>
                             </div>
@@ -70,11 +70,10 @@ export default props => {
                         <div className='col-100 new-colors text-center' >
                             <p>
                                 <strong>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        <span>Lorem Ipsum has been the industry's standard dummy text ever</span>
-                                    <span> since the 1500s, when an unknown printer took a galley of type and</span>
-                                    <span> scrambled it to make a type specimen book. It has survived not only five</span>
-                         centuries, but also the leap into electronic
+                                Somos do curso de Ciência da Computação e desenvolvemos esse sistema 
+                       na disciplina de Projeto Integrador e visa coletar  sinais de Eletrocardiograma  
+                       em tempo real e integrar a um banco de dados na nuvem. Este site é responsável 
+                       por intermediar pacientes e médicos que desejam utilizar esse sistema desenvolvido.
                            </strong>
                             </p>
                         </div>
@@ -104,10 +103,12 @@ export default props => {
                                 <div className='line redes-sociais'>
                                     <ul>
                                         <li>
-                                            <a href="" className=''> <img src={instagram} alt="instagram" /> </a>
+                                            <a href="https://github.com/marcielbp" className=''>
+                                                 <img src={github} alt="github" /> </a>
                                         </li>
                                         <li>
-                                            <a href="" className=''><img src={facebook} alt="facebook" /></a>
+                                            <a href="https://www.linkedin.com/in/marcielbp/"
+                                             className=''><img src={linkedin} alt="linkedin" /></a>
                                         </li>
                                         <li>
                                         </li>
@@ -128,11 +129,13 @@ export default props => {
                                 <div className='line redes-sociais'>
                                     <ul>
                                         <li>
-                                            <a href="https://www.instagram.com/f.pinheirooo/" className=''>
-                                                <img src={instagram} alt="instagram" /> </a>
+                                            <a href="https://github.com/FelipePinheiro27" className=''>
+                                                <img src={github} alt="github" /> </a>
                                         </li>
                                         <li>
-                                            <a href="" className=''><img src={facebook} alt="facebook" /></a>
+                                            <a href="https://www.linkedin.com/in/felipe-pinheiro-9551271a8/"
+                                             className=''
+                                            ><img src={linkedin} alt="linkedin" /></a>
                                         </li>
                                         <li>
                                         </li>
@@ -154,10 +157,13 @@ export default props => {
                                 <div className='line redes-sociais'>
                                     <ul>
                                         <li>
-                                            <a href="" className=''> <img src={instagram} alt="instagram" /> </a>
+                                            <a href="https://github.com/diefesson" className=''
+                                            > <img src={github} alt="github" /> </a>
                                         </li>
                                         <li>
-                                            <a href="" className=''><img src={facebook} alt="facebook" /></a>
+                                            <a href="https://www.linkedin.com/in/diefesson" 
+                                            className=''>
+                                                <img src={linkedin} alt="linkedin" /></a>
                                         </li>
                                         <li>
                                         </li>
@@ -178,10 +184,12 @@ export default props => {
                                 <div className='line redes-sociais'>
                                     <ul>
                                         <li>
-                                            <a href="" className=''> <img src={instagram} alt="instagram" /> </a>
+                                            <a href="https://github.com/luisfelipe23" className=''
+                                            > <img src={github} alt="github" /> </a>
                                         </li>
                                         <li>
-                                            <a href="" className=''><img src={facebook} alt="facebook" /></a>
+                                            <a href="https://www.linkedin.com/mwlite/in/luis-felipe-torres-7b54731a4"
+                                             className=''><img src={linkedin} alt="linkedin" /></a>
                                         </li>
                                         <li>
                                         </li>
@@ -201,10 +209,12 @@ export default props => {
                                 <div className='line redes-sociais'>
                                     <ul>
                                         <li>
-                                            <a href="" className=''><img src={instagram} alt="instagram" /></a>
+                                            <a href="https://github.com/loiola0/" className=''
+                                            ><img src={github} alt="github" /></a>
                                         </li>
                                         <li>
-                                            <a href="" className=''><img src={facebook} alt="facebook" /></a>
+                                            <a href="https://www.linkedin.com/in/victor-martins-734933120/" 
+                                            className=''><img src={linkedin} alt="linkedin" /></a>
                                         </li>
                                         <li>
                                         </li>

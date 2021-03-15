@@ -36,12 +36,24 @@ class index extends Component {
     newPage() {
         const date = this.state.date;
         const medicId = this.state.doctorId;
-        localStorage.setItem('date', date)
-        localStorage.setItem('medicId', medicId)
+        if (date !== "" && medicId !== 0) {
+            localStorage.setItem('date', date)
+            localStorage.setItem('medicId', medicId)
+            window.location = 'horarios-consulta'
+        }
+        else if (date === "" || medicId === 0) {
+            alert("Todos os campos devem ser preenchidos!!")
+        }
     }
 
     render() {
         const { doctors } = this.state;
+        const newDate = new Date();
+        const year = newDate.getFullYear()
+        const month = newDate.getMonth()
+        const day = newDate.getDate()
+        const today =  year + '-' + month + '-' + day;
+
         return (
             <div className='borda-consulta'>
                 <div className='select-consulta'>
@@ -51,8 +63,10 @@ class index extends Component {
                     </select>
                 </div>
                 <div className='select-consulta'>
-                    <select className='button-select-consulta' onChange={this.handleChange}
+                    <select className='button-select-consulta' required onChange={this.handleChange}
                         name="doctorId">
+                        <option value="" selected disabled> Selecione um dos médicos...</option>
+
                         {doctors.map(doctor => (
                             <option key={doctor.userId} value={doctor.userId}
                                 className='text-center' >
@@ -62,13 +76,14 @@ class index extends Component {
                 </div>
                 <div className='select-consulta'>
                     <div className='time-consulta'>
-                        <input type="date" name="date" onChange={this.handleChange} />
+                        <input type="date" required min={today} name="date"
+                            onChange={this.handleChange} />
                     </div>
                 </div>
                 <div className='button-submit-consulta'>
-                    <Link className='reset-link-menu button-new-page' to='horarios-consulta'>
+                    <div className='reset-link-menu button-new-page' type='submit' to='horarios-consulta'>
                         <button onClick={() => this.newPage()}><strong>Ver horários</strong></button>
-                    </Link>
+                    </div>
                 </div>
             </div>
         )

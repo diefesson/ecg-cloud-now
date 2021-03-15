@@ -13,7 +13,6 @@
 
 .agroup-times{
     display: grid;
-    // grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     align-content: space-between;
     justify-content: space-between;
@@ -67,6 +66,8 @@
     border-bottom-right-radius: 30px;
     align-items: center;
     justify-content: center;
+    outline: none;
+    border: none;
 }
 .input-submite:hover{
     cursor: pointer;

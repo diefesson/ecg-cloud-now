@@ -15,7 +15,7 @@ export default props => {
                 <p>É necessário fazer login para acessar esta página</p>
             </div>
             <div>
-                <Link className='redirect-button' to='login-paciente'>
+                <Link className='redirect-button' to='login'>
                     <p className='label-redirect'>Fazer login</p>
                 </Link>
             </div>

@@ -38,24 +38,6 @@ export default props => {
                         <div className='card-position'>
                             <Card />
                         </div>
-                        <div className='card-position'>
-                            <Card />
-                        </div>
-                        <div className='card-position'>
-                            <Card />
-                        </div>
-                        <div className='card-position'>
-                            <Card />
-                        </div>
-                        <div className='card-position'>
-                            <Card />
-                        </div>
-                        <div className='card-position'>
-                            <Card />
-                        </div>
-                        <div className='card-position'>
-                            <Card />
-                        </div>
                     </div>
                 </div>
             </div>

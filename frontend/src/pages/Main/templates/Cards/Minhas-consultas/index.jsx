@@ -16,12 +16,12 @@ export default props => {
                             Consulta #{props.consulta}
                         </div>
                         <div className='text-center'>
-                            {props.date}&emsp;
-                            {props.time}
+                            Data: {props.date}
+
                         </div>
                         <div className='text-center'>
-                            Dr(a) Adail Machado da Costa
-                    </div>
+                            Horário: {props.time}
+                        </div>
                     </div>
                 </div>
             </div>

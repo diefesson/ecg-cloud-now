@@ -23,7 +23,6 @@ export default{
             
         }
        else{
-            // alert("Username ou senha incorretos!!")
         }
     } catch (err) {
         if (err.response !== undefined && err.response.status === 401 || err.response.status === 403) {

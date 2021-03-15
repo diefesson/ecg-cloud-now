@@ -59,7 +59,7 @@ class index extends Component {
         api.post(process.env.REACT_APP_ENDPOINT_CREATE_USER,
             { username, email, name, phone, type, idDoc, state, city, district, address, password }).then(() => {
                 alert("Conta criada com sucesso!!")
-                window.location.replace('/login-paciente')
+                window.location.replace('/login')
             }
             ).catch((error) => {
             }
@@ -213,7 +213,7 @@ class index extends Component {
                                     <label>Ja possui uma conta?</label>
                                 </div>
                                 <div className='input-form'>
-                                    <Link className='' to='login-paciente'>
+                                    <Link className='' to='login'>
                                         <button className='custom-button-register '>Fazer Login</button>
                                     </Link>
 

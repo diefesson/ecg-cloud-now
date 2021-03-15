@@ -1,4 +1,7 @@
 import React from 'react'
+import {
+    BrowserRouter as Router, Switch, Route, Link
+} from "react-router-dom";
 
 import './Cards.scss'
 
@@ -6,31 +9,28 @@ import Calendar from './assets/calendar.png'
 
 export default props => {
     return (
-        <div className='cards'>
-            <div className='hover-card'>
-                    {/* <h3>Ver Diagnóstico</h3> */}
+        <Link className='reset-link-menu cards' to='diagnostico'>
+        <div className='hover-card'>
             </div>
 
             <div className='disable-card'>
                 <div className='head-card text-center'>
-                    <h4>Dr. {props.name}</h4>
+                    <h4>Médico responsável</h4>
                 </div>
                 <hr />
                 <div className='body-card'>
                     <div>
-                        <p>Glicemia: &emsp; &emsp; &emsp; 90</p>
+                        <p>Glicemia: &emsp; &emsp; &emsp; **</p>
                     </div>
                     <div>
-                        <p>Pressão Arterial:  &emsp;120</p>
+                        <p>Pressão Arterial:  &emsp;**</p>
                     </div>
                 </div>
                 <div className='date-card'>
-                    {/* <div className='align-date-card'> */}
                     <img src={Calendar} className='calendar-card' alt="calendar" />
-                    <label className='label'>10/10/2020</label>
-                    {/* </div> */}
+                    <label className='label'>**/**/****</label>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }

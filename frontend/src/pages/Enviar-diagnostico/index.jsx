@@ -57,7 +57,6 @@ class index extends Component {
                         <div className='borda-meus-pacientes'>
                             <table id="customers">
                                 <tr>
-                                    <th>Paciente</th>
                                     <th>Data</th>
                                     <th>Hora</th>
                                     <th>Local</th>
@@ -65,13 +64,12 @@ class index extends Component {
                                 </tr>
                                 {appointments.map(appointment => {
                                     const newDate = new Date(appointment.time)
-                                    const day = newDate.getUTCDate();
-                                    const month = newDate.getUTCMonth() + 1;
-                                    const hours = newDate.getUTCHours() + 3;
-                                    const minutes = newDate.getUTCMinutes();
+                                    const day = newDate.getDate();
+                                    const month = newDate.getMonth() + 1;
+                                    const hours = newDate.getHours();
+                                    const minutes = newDate.getMinutes();
                                     return (
                                         <tr className='text-center' key={appointment.appointmentId}>
-                                            <td>Jose Sebastiao da Silva</td>
                                             <td>{day}/{month}</td>
                                             <td>{hours}:{minutes}</td>
                                             <td>Hospital das Clínicas - Crateús</td>

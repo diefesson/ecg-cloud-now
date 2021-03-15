@@ -1,42 +1,238 @@
 header {
-    background-color: #437F8C;
+  background-color: #437F8C;
+}
+
+.container {
+  top: 0%;
+  .menu-section {
+    width: 500px;
+    align-items: right;
+
+    .menu-nav {
+      nav {
+        margin-left: 10px;
+        max-width: 610px;
+        width: 100%;
+        height: 80px;
+      }
+    }
   }
+}
+
+.hamburguer {
+  overflow: initial;
+}
+
+.drop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #437F8C;
+  display: none;
+  z-index: 10;
+}
+
+#menu-toggle {
+  position: absolute;
+  opacity: 0;
+}
+
+header .container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 98%;
+  margin: auto;
+}
+
+header img {
+  width: 200px;
+  margin-left: 5%;
+  margin-top: 10px;
+  padding: 15px;
+}
+
+header nav {
   
-  header .container {
-    display: flex;
+}
+
+header nav ul {
+  margin-right: auto;
+  display: flex;
+}
+
+header nav ul li {
+  list-style: none;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 0px 70px 0px 10px;
+  transition: all 250ms linear 0s;
+}
+
+header nav ul li a:hover {
+  text-decoration: underline;
+}
+
+
+@media screen and (max-width: 736px) {
+.container {
+  nav {
+    display: none;
+  }
+
+  .menu-section {
+    .hamburguer {
+        label {
+          cursor: pointer;
+          position: relative;
+          display: block;
+          height: 22px;
+          width: 40px;
+          margin-left: 80%;
+          margin-top: -20px;
+        }
+        
+        label span {
+          position: absolute;
+          display: block;
+          height: 6px;
+          width: 100%;
+          border-radius: 30px;
+          background: white;
+          transition: 0.3s ease-in-out;
+        }
+  
+        label span:nth-child(1) {
+          top: 0px;
+        }
+  
+        label span:nth-child(2) {
+          top: 14px;
+        }
+  
+        label span:nth-child(3) {
+          top: 28px;
+        }
+  
+        label span:nth-child(4) {
+          opacity: 0;
+        }
+      }   
+    } 
+    
+  #menu-toggle:checked + .hamburguer label span:nth-child(1) {
+    transform: rotate(-45deg);
+    top: 12px;
+    z-index: 100;
+  }
+
+  #menu-toggle:checked + .hamburguer label span:nth-child(2) {
+    opacity: 0;
+  }
+
+  #menu-toggle:checked + .hamburguer label span:nth-child(3) {
+    transform: rotate(45deg);
+    top: 12px;
+    z-index: 100;
+  }
+
+  #menu-toggle:checked + .hamburguer .drop {
+    display: block;
+  }
+
+  #menu-toggle:checked .hamburguer {
+    overflow: hidden;
+  }
+
+  #menu-toggle:checked + .hamburguer .menu-nav {
+    position: absolute;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
-  
-    width: 100%;
+    margin-left: -20vw;
     margin: auto;
+    right: 0;
+    left: 0;
+
+    z-index: 210;
+    nav {
+      display: block;
+      ul {
+        text-align: center;
+        display: block;
+
+         a {
+           transition-duration: 0.5s;
+           font-size: 2rem;
+           line-height: 7rem;
+           display: block;
+         }
+      }
+    }
   }
-  
-  header img {
-    width: 200px;
-    margin-left: 30px;
-    margin-top: 10px;
-    padding: 15px;
+}
+
+}
+
+@media screen and (max-width: 530px) {
+.container {
+  .menu-section {
+    .hamburguer {
+      label {
+        margin-left: 70%;
+      }
+    }
   }
-  
-  header nav ul {
-      margin-right: 150px;
-    display: flex;
+}
+}
+
+
+@media screen and (max-width: 460px) {
+.container {
+  .menu-section {
+    .hamburguer {
+      label {
+        margin-left: 60%;
+      }
+    }
   }
-  
-  header nav ul li {
-    list-style: none;
+}
+}
+
+
+@media screen and (max-width: 400px) {
+.container {
+  .menu-section {
+    .hamburguer {
+      label {
+        margin-left: 50%;
+      }
+    }
   }
-  
-  header nav ul li a {
-    text-decoration: none;
-    color: white;
-    text-transform: uppercase;
-    font-size: 14px;
-    padding: 0px 70px 0px 10px;
-    transition: all 250ms linear 0s;
+}
+
+header img {
+  margin-left: 0%;
+}
+}
+
+@media screen and (max-width: 330px) {
+.container {
+  .menu-section {
+    .hamburguer {
+      label {
+        margin-left: 30%;
+      }
+    }
   }
-  
-  header nav ul li a:hover {
-      text-decoration: underline;
-  }
-  
+}
+}

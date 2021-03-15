@@ -1,17 +1,148 @@
 .username-home{
+    position: absolute;
     display: flex;
 }
 
 .username-top{
-    margin: 0;
     margin-right: 5px;
     padding: 0;
     font-size: 1.1rem;
     font-style: italic;
     margin-top: 3px;
-    margin-left: 800px;
 }
 
 .username-home img{
     margin-top: 5px;
+}
+
+@media screen and (max-width: 1290px) {
+    .username-home {
+        margin-left: -10%;
+    }
+}
+
+@media screen and (max-width: 1160px) {
+    .username-home {
+        margin-left: -20%;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .username-home {
+        margin-left: -30%;
+    }
+}
+
+@media screen and (max-width: 785px) {
+    .username-home {
+        margin-left: -40%;
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .username-home {
+        margin-left: -50%;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .username-home {
+        margin-left: -60%;
+    }
+}
+
+@media screen and (max-width: 630px) {
+    .username-home {
+        margin-left: -70%;
+    }
+}
+
+@media screen and (max-width: 594px) {
+    .username-home {
+        margin-left: -80%;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .username-home {
+        margin-left: -90%;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .username-home {
+        margin-left: -100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .username-home {
+        margin-left: -110%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .username-home {
+        margin-left: -120%;
+    }
+}
+
+@media screen and (max-width: 456px) {
+    .username-home {
+        margin-left: -130%;
+    }
+}
+
+@media screen and (max-width: 435px) {
+    .username-home {
+        margin-left: -140%;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    .username-home {
+        margin-left: -150%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .username-home {
+        margin-left: -160%;
+    }
+}
+
+@media screen and (max-width: 385px) {
+    .username-home {
+        margin-left: -170%;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .username-home {
+        margin-left: -180%;
+    }
+}
+
+@media screen and (max-width: 358px) {
+    .username-home {
+        margin-left: -190%;
+    }
+}
+
+@media screen and (max-width: 345px) {
+    .username-home {
+        margin-left: -200%;
+    }
+}
+
+@media screen and (max-width: 335px) {
+    .username-home {
+        margin-left: -210%;
+    }
+}
+
+@media screen and (max-width: 322px) {
+    .username-home {
+        margin-left: -220%;
+    }
 }

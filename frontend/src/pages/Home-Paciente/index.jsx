@@ -42,15 +42,15 @@ export default props => {
                     </div>
                     <div className='sobre-home'>
                         <h1>SOBRE O PI-ECG</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sem nisl,
-                        pharetra id mi ac, efficitur viverra urna. Proin mauris felis, rhoncus nec iaculis
-                        eu, condimentum vitae nisi. In hac habitasse platea dictumst. Curabitur gravida
-                        leo accumsan, pulvinar quam et, suscipit turpis. Mauris vestibulum luctus eros,
-                        et molestie arcu luctus ultricies. Etiam cursus ante interdum nisl tristique varius.
-                        Quisque pulvinar, nulla in fermentum mollis, purus erat molestie risus, quis
-                        fermentum eros diam non nisl. Etiam non enim non lacus sodales viverra. Fusce
-                        rhoncus mauris quis vulputate congue. Curabitur luctus molestie dui quis
-accumsan. Fusce ullamcorper pharetra ipsum id congue.</p>
+                        <p>É um sistema desenvolvido na Universidade Federal do Ceará campus de Crateús 
+                        na disciplina de Projeto Integrador que visa coletar sinais de Eletrocardiograma 
+                        em tempo real e integrar a um banco de dados na nuvem. Este site é responsável por intermediar
+                        pacientes e médicos que desejam utilizar esse sistema. As funções de 
+                        diagnósticos ainda não estão sendo utilizadas, pois necessitam de profissionais da
+                        área e, além disso, necessitam de um aparelho específico para a coleta. 
+                        (SITE EM FASE DE TESTES, acesse: <a href="https://docs.google.com/forms/d/e/1FAIpQLSf587OlmayshChBgtbrUcR5OkNDODuaNl6YkD9ZKkmhOfx2VQ/viewform?usp=sf_link">este link</a> para preencher um formulário 
+                        sobre esse sistema)
+                        </p>
                     </div>
                 </section>
             </div>

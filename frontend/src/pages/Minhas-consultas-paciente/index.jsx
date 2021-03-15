@@ -49,10 +49,10 @@ class index extends Component {
                             {appointments.map(appointment => {
                                 { index++ }
                                 const newDate = new Date(appointment.time)
-                                const day = newDate.getUTCDate();
-                                const month = newDate.getUTCMonth() + 1;
-                                const hours = newDate.getUTCHours() + 3;
-                                const minutes = newDate.getUTCMinutes();
+                                const day = newDate.getDate();
+                                const month = newDate.getMonth() + 1;
+                                const hours = newDate.getHours();
+                                const minutes = newDate.getMinutes();
                                 return (
                                     <div className='card-position-consultas'
                                         onClick={() => this.renderInfo(appointment.medicId,

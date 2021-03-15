@@ -55,21 +55,23 @@
     height: 20px;
 }
 
-.input-submit-diagnostico input{
+.input-submit-diagnostico{
     background-color: #001C81;
+    display: flex;
+    justify-content: center;
     outline: none;
     opacity: 0.8;
     color: #ffff;
     border: none;
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     padding: 7px;
     width: 110px;
     border-radius: 25px;
     margin-left: 79%;
 }
 
-.input-submit-diagnostico input:hover{
+.input-submit-diagnostico:hover{
     cursor: pointer;
     opacity: 1;
 }
