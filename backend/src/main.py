@@ -2,6 +2,7 @@ import traceback
 
 from flask import Flask
 from flask_cors import CORS
+from waitress import serve
 
 import enviroment
 from web.appointment_blueprint import appointment_blueprint
@@ -30,4 +31,7 @@ def handle_internal(exception):
     return {"success": False, "cause": "Internal error", "traceback": tb}, 500
 
 
-app.run(enviroment.HTTP_HOST, enviroment.HTTP_PORT)
+if enviroment.DEPLOY_MODE == "dev":
+    app.run(enviroment.HTTP_HOST, enviroment.HTTP_PORT)
+else:
+    serve(app, host=enviroment.HTTP_HOST, port=enviroment.HTTP_PORT)
