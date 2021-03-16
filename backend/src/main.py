@@ -1,3 +1,5 @@
+import traceback
+
 from flask import Flask
 from flask_cors import CORS
 
@@ -24,7 +26,8 @@ def hello():
 # noinspection PyUnusedLocal
 @app.errorhandler(500)
 def handle_internal(exception):
-    return {"success": False, "cause": "Internal error"}, 500
+    tb = str(traceback.format_exc())
+    return {"success": False, "cause": "Internal error", "traceback": tb}, 500
 
 
 app.run(enviroment.HTTP_HOST, enviroment.HTTP_PORT)
