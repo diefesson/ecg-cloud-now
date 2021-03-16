@@ -31,9 +31,7 @@ def session_create():
     user_id = _user_repository.username_to_user_id(username)
     session = Session(user_id)
     _session_repository.add_session(session)
-    response = make_response({"success": True, "session": session_to_json(session)})
-    response.set_cookie("SESSION_TOKEN", session.token)
-    return response
+    return {"success": True, "session": session_to_json(session)}
 
 
 @session_blueprint.route("/session", methods=["GET"])
@@ -47,18 +45,13 @@ def session_current():
 
 @session_blueprint.route("/session", methods=["DELETE"])
 def session_logout():
-    session = _current_session()
-    if not session:
-        return {"success": False, "cause": "Invalid session"}, 403
-    response = make_response({"success": True})
-    response.set_cookie("SESSION_TOKEN", "", max_age=0)
-    return response
+    return {"success": False, "cause": "deprecated"}
 
 
 def _current_session() -> Optional[Session]:
-    if "SESSION_TOKEN" not in request.cookies:
+    if "SessionToken" not in request.headers:
         return None
-    token = request.cookies["SESSION_TOKEN"]
+    token = request.headers["SessionToken"]
     session = _session_repository.get_session(token)
     return session
 
