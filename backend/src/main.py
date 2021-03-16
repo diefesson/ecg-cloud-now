@@ -15,7 +15,7 @@ app.register_blueprint(sample_blueprint)
 app.register_blueprint(user_blueprint)
 app.register_blueprint(session_blueprint)
 app.register_blueprint(appointment_blueprint)
-CORS(app, origin=enviroment.FRONTEND_ORIGIN, supports_credentials=True)
+CORS(app, origins=enviroment.FRONTEND_ORIGIN, supports_credentials=True)
 
 
 @app.route('/')
