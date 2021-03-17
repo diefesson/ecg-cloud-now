@@ -1,0 +1,48 @@
+.borda-meus-pacientes{
+    margin-left: 80px;
+    max-height: 74vh;
+    width: 65vw;
+    overflow: auto;
+    border-radius: 12px;
+    background-color: #ffff;
+    color: rgb(17, 16, 16);
+}
+
+::-webkit-scrollbar {
+    width: 2px; 
+    background: transparent;
+}
+
+#customers {    
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-select-patient:hover{
+    cursor: pointer;
+}
+
+#customers td,
+#customers th {
+    padding: 8px;
+    color: rgb(17, 16, 16);
+}
+
+.table-select-patient{
+    float: center;
+}
+
+#customers tr:nth-child(even) {
+    background-color: #f2f2f2;
+    color: rgb(17, 16, 16);
+}
+
+#customers tr:hover {
+    font-weight: bold;
+}
+
+#customers th, #customers td {
+    border-bottom: 1px solid #ddd;
+  }
+
+
